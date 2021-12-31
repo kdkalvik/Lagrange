@@ -3,9 +3,6 @@ disqus:
   comments: false
   disqus_shortname: 'https-lenpaul-github-io-lagrange'
 
-# If you are not using Google Analytics, please change 'google-ID' to an empty string
-google-ID: 'G-Z8NHVQV9ST'
-
 menu:
 - {name: 'Blog Posts', url: 'blog_posts.html'}
 - {name: 'CV',   url: 'cv.html'}
