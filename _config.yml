@@ -12,6 +12,9 @@
 
 # jekyll-paginate configuration
 paginate:            5
+collections:
+  publications:
+    output: true
 
 # Build settings
 markdown:            kramdown

@@ -5,6 +5,7 @@ disqus:
 
 menu:
 - {name: 'Blog Posts', url: 'blog_posts.html'}
+- {name: 'Publications', url: 'publications.html'}
 - {name: 'CV',   url: 'cv.html'}
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
