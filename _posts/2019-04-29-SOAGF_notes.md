@@ -5,6 +5,7 @@ author: "Kalvik Jakkala"
 categories: journal
 tags: [documentation,sample]
 image: SOAGF/SOAGF_normal_sol.gif
+abstract: "Algorithms to simultaneously compute the optimal assignments and formation parameters for a team of robots from a given initial formation to a variable goal formation (where the shape of the goal formation is given, and its scale and location parameters must be optimized)."
 ---
 
 ## Introduction
@@ -122,6 +123,7 @@ I considered a few smaller problems, each with less than 11 points and was able 
 I implenented the solution presented by Agarwal and Akella for simultaneous optimization of assignments and goal formation parameters and addressed the limitation of the solution by proposing an iterative process to handle variable rotations of the goal formation. Lastly, I implemented the iterative solution and presented the results.
 
 ## References
+* The code used to generate the figures in this post can be found in my GitHub repo <a href="https://github.com/kdkalvik/SOAGF"><i class="fa fa-github" aria-hidden="true"></i></a>
 
 * Agarwal, Saurav, and Srinivas Akella. "Simultaneous optimization of assignments and goal formations for multiple robots." 2018 IEEE International Conference on Robotics and Automation (ICRA). IEEE, 2018.
 

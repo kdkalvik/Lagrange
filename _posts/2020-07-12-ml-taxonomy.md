@@ -4,6 +4,7 @@ title: "A Taxonomy of Machine Learning"
 author: "Kalvik Jakkala"
 categories: journal
 tags: [documentation,sample]
+abstract: "A diagram showing various methods in machine learning and how they relate to each other."
 ---
 {% include dendrogram.html %}
 
