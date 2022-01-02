@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title: "Deep CSI Learning for Gait Biometric Sensing and Recognition"
 author: "Kalvik Jakkala"
 venue: BalkanCom

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title: "STAR: Simultaneous Tracking and Recognition through Millimeter Waves and Deep Learning"
 author: "Kalvik Jakkala"
 venue: WMNC

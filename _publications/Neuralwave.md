@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title: "NeuralWave: Gait-Based User Identification Through Commodity WiFi and Deep Learning"
 author: "Kalvik Jakkala"
 venue: IECON

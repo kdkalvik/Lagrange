@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<h1>
+  <center>
+  {{ page.title }}
+  </center>
+</h1>
+<p>&nbsp;</p>
+<article>
+  {{ content }}
+</article>
+{% if site.hide_post_share != true %}
+  {% include social-sharing.html %}
+{% endif %}
+{% if site.data.settings.disqus.comments %}
+  {% include disqus.html %}
+{% endif %}

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title: "Deep Gaussian Processes: A Survey"
 author: "Kalvik Jakkala"
 venue: arXiv

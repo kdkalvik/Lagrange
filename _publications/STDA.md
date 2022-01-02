@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: publication
 title: "Spatio-Temporal Domain Adaptation for Gait Based User Recognition from Radar Data"
 author: "Kalvik Jakkala"
 venue: Preprint
