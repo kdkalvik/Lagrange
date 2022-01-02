@@ -27,9 +27,9 @@ Code: <a href="https://github.com/kdkalvik/methane-leak-rate-estimation"><i clas
 </center>
 
 <p float="left">
-  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/uncc_logo.png" width="300" style="vertical-align:middle"/>
+  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/uncc_logo.png" width="50%" style="vertical-align:middle"/>
   &nbsp;&nbsp;
-  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/ieee_ras_logo.png" width="250" style="vertical-align:middle"/>
+  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/ieee_ras_logo.png" width="35%" style="vertical-align:middle"/>
 </p>
 
 ## Abstract
