@@ -2,7 +2,7 @@
 layout: publication
 title: "Probabilistic Methane Leak Rate Estimation using Submodular Function Maximization with Routing Constraints"
 author: "Kalvik Jakkala"
-venue: RA-L, Under Review
+venue: RA-L
 year: 2021
 date: 2021-01-01 00:00:00
 ---
