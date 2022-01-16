@@ -3,8 +3,8 @@ layout: publication
 title: "Probabilistic Methane Leak Rate Estimation using Submodular Function Maximization with Routing Constraints"
 author: "Kalvik Jakkala"
 venue: RA-L
-year: 2021
-date: 2021-01-01 00:00:00
+year: 2022
+date: 2022-01-01 00:00:00
 ---
 
 <p>
@@ -19,9 +19,9 @@ date: 2021-01-01 00:00:00
 </p>
 
 <center>
-Paper: <a href="https://kdkalvik.github.io/methane-leak-rate-estimation/paper.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Paper: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/main/paper.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
 &nbsp;&nbsp;
-Derivation: <a href="https://kdkalvik.github.io/methane-leak-rate-estimation/supplemental.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Derivation: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/supplemental/supplemental.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
 &nbsp;&nbsp;
 Code: <a href="https://github.com/kdkalvik/methane-leak-rate-estimation"><i class="fa fa-github" aria-hidden="true"></i></a>
 </center>

@@ -3,8 +3,8 @@ layout: publication
 title: "Bayesian Sensor Placement for Multi-source Localization of Viruses in Wastewater Networks"
 author: "Kalvik Jakkala"
 venue: ICRA, Under Review
-year: 2021
-date: 2021-01-01 00:00:00
+year: 2022
+date: 2022-01-01 00:00:00
 ---
 
 <p>
