@@ -32,7 +32,9 @@ abstract: "A list of lectures on various important topics"
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Essence of calculus 	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Essence of linear algebra 	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Differential equations	</td></tr>	
-        <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>          
+        <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLMrJAkhIeNNT_Xh3Oy0Y4LTj0Oxo8GqsC	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Fourier Analysis (FFT/DFT)	</td></tr>	
+        <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Singular Value Decomposition (SVD/PCA)	</td></tr>	      
+      <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>          
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLXFMmlk03Dt7Q0xr1PIAriY5623cKiH7V	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Algorithms I	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLXFMmlk03Dt5EMI2s2WQBsLsZl7A5HEK6	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Algorithms II	</td></tr>	
         <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>          
@@ -40,6 +42,7 @@ abstract: "A list of lectures on various important topics"
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLyGKBDfnk-iDj3FBd0Avr_dLbrU8VG73O	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Statistical Learning Theory and Applications	</td></tr>	
         <tr class="data_row"><td><a href="	https://www.youtube.com/playlist?list=PLm3J0oaFux3ZYpFLwwrlv_EHH9wtH6pnX	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	CS Theory Toolkit	</td></tr>	
         <tr class="data_row"><td><a href="	https://ocw.mit.edu/courses/mathematics/18-445-introduction-to-stochastic-processes-spring-2015/lecture-notes/	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Stochastic Processes	</td></tr>
+        <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLMrJAkhIeNNR2W2sPWsYxfrxcASrUt_9j	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Engineering Mathematics	</td></tr>
         <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>          	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLd3hlSJsX_Imk_BPmB_H3AQjFKZS9XgZm	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Computer Vision	</td></tr>	
         <tr class="data_row"><td><a href="	https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/lecture-videos/	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Artificial Intelligence	</td></tr>	
