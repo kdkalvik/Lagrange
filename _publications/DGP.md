@@ -7,6 +7,13 @@ year: 2021
 date: 2021-01-01 00:00:00
 ---
 
+<p>
+<center>
+  <a href="https://webpages.uncc.edu/kjakkala"
+   style="text-decoration: none"><b style="color:Black">Kalvik Jakkala</b></a>
+</center>
+</p>
+
 <center>See paper: <a href="https://arxiv.org/pdf/2106.12135.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a></center>
 
 ## Abstract
