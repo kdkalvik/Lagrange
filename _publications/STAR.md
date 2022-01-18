@@ -8,9 +8,9 @@ date: 2019-01-01 00:00:00
 ---
 
 <center>
-Paper: <a href="https://ieeexplore.ieee.org/document/8881354"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Paper: <a href="https://ieeexplore.ieee.org/document/8881354"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Code: <a href="https://github.com/kdkalvik/mmWave-user-recognition"><i class="fa fa-github" aria-hidden="true"></i></a>
+Code: <a href="https://github.com/kdkalvik/mmWave-user-recognition"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 </center>
 
 ## Abstract

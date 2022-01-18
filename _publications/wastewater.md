@@ -19,9 +19,9 @@ date: 2022-01-01 00:00:00
 </p>
 
 <center>
-Paper: <a href="https://kdkalvik.github.io/methane-leak-rate-estimation/paper.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Paper: <a href="https://kdkalvik.github.io/methane-leak-rate-estimation/paper.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Code: <a href="https://github.com/kdkalvik/wastewater-sampling"><i class="fa fa-github" aria-hidden="true"></i></a>
+Code: <a href="https://github.com/kdkalvik/wastewater-sampling"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 </center>
 
 <p float="left">

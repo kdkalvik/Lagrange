@@ -8,11 +8,11 @@ date: 2020-01-01 00:00:00
 ---
 
 <center>
-Paper: <a href="https://nbviewer.org/github/kdkalvik/spatio-temporal-domain-adaptation/blob/master/Paper/paper.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Paper: <a href="https://nbviewer.org/github/kdkalvik/spatio-temporal-domain-adaptation/blob/master/Paper/paper.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Supplementary: <a href="https://nbviewer.org/github/kdkalvik/spatio-temporal-domain-adaptation/blob/master/Paper/Supplementary.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Supplementary: <a href="https://nbviewer.org/github/kdkalvik/spatio-temporal-domain-adaptation/blob/master/Paper/Supplementary.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Code: <a href="https://github.com/kdkalvik/spatio-temporal-domain-adaptation"><i class="fa fa-github" aria-hidden="true"></i></a>
+Code: <a href="https://github.com/kdkalvik/spatio-temporal-domain-adaptation"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 </center>
 
 ## Abstract

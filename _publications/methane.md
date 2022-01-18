@@ -19,11 +19,11 @@ date: 2022-01-01 00:00:00
 </p>
 
 <center>
-Paper: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/main/paper.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Paper: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/main/paper.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Derivation: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/supplemental/supplemental.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+Derivation: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/supplemental/supplemental.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Code: <a href="https://github.com/kdkalvik/methane-leak-rate-estimation"><i class="fa fa-github" aria-hidden="true"></i></a>
+Code: <a href="https://github.com/kdkalvik/methane-leak-rate-estimation"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 </center>
 
 <p float="left">
