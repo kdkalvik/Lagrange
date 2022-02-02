@@ -1,8 +1,8 @@
 ---
 layout: publication
-title: "Probabilistic Methane Leak Rate Estimation using Submodular Function Maximization with Routing Constraints"
+title: "Probabilistic Gas Leak Rate Estimation using Submodular Function Maximization with Routing Constraints"
 author: "Kalvik Jakkala"
-venue: RA-L
+venue: RA-L, ICRA
 year: 2022
 date: 2022-01-01 00:00:00
 ---
@@ -27,9 +27,9 @@ Code: <a href="https://github.com/kdkalvik/methane-leak-rate-estimation"><span s
 </center>
 
 <p float="left">
-  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/uncc_logo.png" width="50%" style="vertical-align:middle"/>
+  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/ieee_ras_logo.png" width="40%" style="vertical-align:middle"/>
   &nbsp;&nbsp;
-  <img src="{{ site.github.url }}/assets/img/methane-leak-rate-estimation/ieee_ras_logo.png" width="35%" style="vertical-align:middle"/>
+  <img src="{{ site.github.url }}/assets/img/wastewater/ieee_icra_logo.png" width="55%" style="vertical-align:middle"/>
 </p>
 
 ## Abstract

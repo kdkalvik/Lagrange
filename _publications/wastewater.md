@@ -2,7 +2,7 @@
 layout: publication
 title: "Bayesian Sensor Placement for Multi-source Localization of Viruses in Wastewater Networks"
 author: "Kalvik Jakkala"
-venue: ICRA, Under Review
+venue: Under Review
 year: 2022
 date: 2022-01-01 00:00:00
 ---
@@ -16,18 +16,6 @@ date: 2022-01-01 00:00:00
   <a href="https://webpages.uncc.edu/sakella/"
    style="text-decoration: none"><b style="color:Black">Srinivas Akella</b></a>
 </center>
-</p>
-
-<center>
-Paper: <a href="https://kdkalvik.github.io/methane-leak-rate-estimation/paper.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
-&nbsp;&nbsp;
-Code: <a href="https://github.com/kdkalvik/wastewater-sampling"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
-</center>
-
-<p float="left">
-  <img src="{{ site.github.url }}/assets/img/wastewater/uncc_logo.png" width="50%" style="vertical-align:middle"/>
-  &nbsp;&nbsp;
-  <img src="{{ site.github.url }}/assets/img/wastewater/ieee_icra_logo.png" width="35%" style="vertical-align:middle"/>
 </p>
 
 ## Abstract
