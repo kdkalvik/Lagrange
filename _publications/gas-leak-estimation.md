@@ -19,11 +19,11 @@ date: 2022-01-01 00:00:00
 </p>
 
 <center>
-Paper: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/main/paper.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
+Paper: <a href="https://ieeexplore.ieee.org/document/9706242"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Derivation: <a href="https://nbviewer.org/github/kdkalvik/methane-leak-rate-estimation/blob/main/paper/supplemental/supplemental.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
+Derivation: <a href="https://nbviewer.org/github/UNCCharlotte-CS-Robotics/Gas-Leak-Estimation/blob/main/Supplemental.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
-Code: <a href="https://github.com/kdkalvik/methane-leak-rate-estimation"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
+Code: <a href="https://github.com/UNCCharlotte-CS-Robotics/Gas-Leak-Estimation"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 </center>
 
 <p float="left">
