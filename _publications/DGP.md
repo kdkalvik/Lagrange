@@ -2,7 +2,7 @@
 layout: publication
 title: "Deep Gaussian Processes: A Survey"
 author: "Kalvik Jakkala"
-venue: arXiv
+venue: CoRR
 year: 2021
 date: 2021-01-01 00:00:00
 ---
