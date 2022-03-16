@@ -8,7 +8,7 @@ date: 2019-01-01 00:00:00
 ---
 
 <center>
-Paper: <a href="https://ieeexplore.ieee.org/document/8881354"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
+Paper: <a href="https://nbviewer.org/github/kdkalvik/mmWave-user-recognition/blob/master/paper.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
 Code: <a href="https://github.com/kdkalvik/mmWave-user-recognition"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 </center>
