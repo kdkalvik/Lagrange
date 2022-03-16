@@ -5,7 +5,7 @@ permalink: /cv
 ---
 
 <center><a href="url"><img src="{{ site.github.url }}/assets/img/Kalvik.jpg" height="auto" width="200" style="border-radius:50%"></a></center>
-<center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><i class="fa fa-file-text" aria-hidden="true"></i></a></b></center>
+<center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text" aria-hidden="true"></i></span></a></b></center>
 
 # Research Interests
 I am interested in Mathematical optimization and Deep learning. Specifically, methods that can reliably express uncertainty, make open-set predictions, and incorporate prior domain knowledge. I am currently researching deep learning for operations research problems.
