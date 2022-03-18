@@ -25,7 +25,7 @@ Derivation: <a href="https://nbviewer.org/github/UNCCharlotte-CS-Robotics/Gas-Le
 &nbsp;&nbsp;
 Code: <a href="https://github.com/UNCCharlotte-CS-Robotics/Gas-Leak-Estimation"><span style="color: #4285F4;"><i class="fa fa-github"></i></span></a>
 &nbsp;&nbsp;
-Slides: <a href="https://nbviewer.org/github/UNCCharlotte-CS-Robotics/Gas-Leak-Estimation/blob/main/presentation_slides.pdf"><span style="color: #4285F4;"><i class="fa-presentation-screen"></i></span></a>
+Slides: <a href="https://nbviewer.org/github/UNCCharlotte-CS-Robotics/Gas-Leak-Estimation/blob/main/presentation_slides.pdf"><span style="color: #4285F4;"><i class="fa-file-powerpoint-o"></i></span></a>
 </center>
 
 <p float="left">
@@ -58,6 +58,4 @@ Methane, a harmful greenhouse gas, is prone to leak during extraction from oil w
 }
 </style>
 
-<div class="yt">
-  <iframe width="560" height="315" src="https://youtu.be/7S0bLzwRrlE" allowfullscreen></iframe>
-</div>
+<div class="yt"><iframe width="560" height="315" src="https://www.youtube.com/embed/7S0bLzwRrlE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
