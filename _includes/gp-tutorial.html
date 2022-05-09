@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Copy_of_Gaussian_Processes</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>gaussian_processes_tutorial</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -4980,7 +4979,7 @@ form{
   .bp3-running-text table th, table.bp3-html-table th{
     color:#182026;
     font-weight:600; }
-  
+
   .bp3-running-text table td,
   table.bp3-html-table td{
     color:#182026; }
@@ -14579,6 +14578,18 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a href="https://colab.research.google.com/github/kdkalvik/gaussian-processes-tutorial/blob/main/gaussian_processes_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Gaussian-Processes"><strong>Gaussian Processes</strong><a class="anchor-link" href="#Gaussian-Processes">&#182;</a></h1><p>A collection of random variables is called a Gaussian Process(GPs) if the joint distribution of any finite number of its members is a Gaussian. Gaussian processes can be thought of as a reinterpretation or a generalization of Gaussian distributions. So, before one can get into the details of GPs, we need to understand the Gaussian distribution and some of its properties.</p>
 <h1 id="Gaussian-Distributions">Gaussian Distributions<a class="anchor-link" href="#Gaussian-Distributions">&#182;</a></h1><p>A random variable $y$ is said to have a Gaussian distribution $y \sim \mathcal{N}(\mu, \Sigma)$ with mean $\mu$ and covariance $\Sigma$ if its probability density function is
 $$
@@ -14589,21 +14600,21 @@ $
 y = \begin{bmatrix}
     y_A \\
     y_B \\
-    \end{bmatrix} 
+    \end{bmatrix}
 $
-, with mean 
+, with mean
 $
 \mu = \begin{bmatrix}
       \mu_A \\
       \mu_B \\
-      \end{bmatrix} 
-$ 
+      \end{bmatrix}
+$
 and covariance matrix
 $
 \Sigma = \begin{bmatrix}
          \Sigma_{AA} \ \ \Sigma_{AB}\\
          \Sigma_{BA} \  \ \Sigma_{BB}\\
-         \end{bmatrix} 
+         \end{bmatrix}
 $.
 It has the following properties:</p>
 <ol>
@@ -14621,20 +14632,17 @@ y_A+y_B \sim \mathcal{N}(\mu_A+\mu_B, \Sigma_A+\Sigma_B)
 $$</p>
 </li>
 <li><p>Conditioning:</p>
-<p>The conditioning of a gaussian distributed random variable results in a gaussian distributed posterior. Moreover, the posterior's mean and covariance can be calculated analytically, this is not always possible for most other distributions. 
-$$
-p(y_A|y_B) = \frac{p(y_A, y<em>B)}{\int</em>{y_A}{p(y_A,y_B)}} \ \ \</p>
-
-<pre><code>    = \frac{p(y_B|y_A)p(y_A)}{\int_{y_A}{p(y_A,y_B)}} \\
-</code></pre>
-<p>y_A|y_B \sim \mathcal{N}(\mu<em>A+\Sigma</em>{AB}\Sigma^{-1}_{BB}(y_B-\mu_B), \</p>
-
-<pre><code>       \Sigma_{AA}-\Sigma_{AB}\Sigma^-1_{BB}\Sigma_{BA})
-</code></pre>
-<p>$$</p>
+<p>The conditioning of a gaussian distributed random variable results in a gaussian distributed posterior. Moreover, the posterior's mean and covariance can be calculated analytically, this is not always possible for most other distributions.</p>
 </li>
+</ol>
+$$
+p(y_A|y_B) = \frac{p(y_A, y_B)}{\int_{y_A}{p(y_A,y_B)}} \ \ \
+           = \frac{p(y_B|y_A)p(y_A)}{\int_{y_A}{p(y_A,y_B)}} \\
+y_A|y_B \sim \mathcal{N}(\mu_A+\Sigma_{AB}\Sigma^{-1}_{BB}(y_B-\mu_B), \
+              \Sigma_{AA}-\Sigma_{AB}\Sigma^-1_{BB}\Sigma_{BA})
+$$<ol>
 <li><p>Marganilization:</p>
-<p>Marganilization of a variable from a multivariate gaussian distribution results is a gaussian distributed posterior. 
+<p>Marganilization of a variable from a multivariate gaussian distribution results is a gaussian distributed posterior.
 $$
 \begin{align}
 p(y_A) = \int_{y_B}p(y_A, y_B)dy_B \\
@@ -14657,7 +14665,7 @@ $$</p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#@title  { run: &quot;auto&quot;, vertical-output: true, form-width: &quot;50%&quot;, display-mode: &quot;both&quot; }</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
@@ -14691,7 +14699,7 @@ $$</p>
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14743,7 +14751,7 @@ jp-needs-light-background
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#@title  { run: &quot;auto&quot;, vertical-output: true, form-width: &quot;50%&quot;, display-mode: &quot;both&quot; }</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.html&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;jshtml&quot;</span>
@@ -14764,12 +14772,12 @@ jp-needs-light-background
 
 <span class="c1">#plot contour plot of 2D gaussian </span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Contour Plot&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Y1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y2&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Contour Plot&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Y1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y2&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
-<span class="n">textstr</span> <span class="o">=</span> <span class="s2">&quot;Covariance Matrix</span><span class="se">\n</span><span class="s2">     </span><span class="si">{:.2f}</span><span class="s2">   </span><span class="si">{:.2f}</span><span class="se">\n</span><span class="s2">     </span><span class="si">{:.2f}</span><span class="s2">   </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> 
-                                                                               <span class="n">off_diag_cov</span><span class="p">,</span> 
+<span class="n">textstr</span> <span class="o">=</span> <span class="s2">&quot;Covariance Matrix</span><span class="se">\n</span><span class="s2">     </span><span class="si">{:.2f}</span><span class="s2">   </span><span class="si">{:.2f}</span><span class="se">\n</span><span class="s2">     </span><span class="si">{:.2f}</span><span class="s2">   </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span>
+                                                                               <span class="n">off_diag_cov</span><span class="p">,</span>
                                                                                <span class="n">off_diag_cov</span><span class="p">,</span>
                                                                                <span class="mf">1.0</span><span class="p">)</span>
 <span class="n">props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -14787,11 +14795,11 @@ jp-needs-light-background
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_z</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Y1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y2&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;P(Y1,Y2)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Y1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y2&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;P(Y1,Y2)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\bf{p(Y1|Y2)}$&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The silder corresponds to the Y2 value&quot;</span><span class="p">,</span>
-                 <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> 
+                 <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">plot</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -14815,7 +14823,7 @@ jp-needs-light-background
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14834,7 +14842,7 @@ jp-needs-light-background
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
 
@@ -15072,7 +15080,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider2d0c78c7e2764d37827e8f75fdee6dd8";
     var loop_select_id = "_anim_loop_select2d0c78c7e2764d37827e8f75fdee6dd8";
     var frames = new Array(32);
-    
+
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbAAAAEgCAYAAADVKCZpAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz\
 AAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0\
 dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAAgAElEQVR4nOydeXgb1bn/v9pseV/jeI33bI5DSGKS\
@@ -44461,7 +44469,7 @@ t1gFKm53AAAAAElFTkSuQmCC\
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#@title  { run: &quot;auto&quot;, vertical-output: true, form-width: &quot;50%&quot;, display-mode: &quot;both&quot; }</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.html&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;jshtml&quot;</span>
@@ -44497,8 +44505,8 @@ t1gFKm53AAAAAElFTkSuQmCC\
   <span class="n">cond_cov</span> <span class="o">=</span> <span class="n">AA</span><span class="o">-</span><span class="n">AB</span><span class="nd">@BB_inv@AB</span><span class="o">.</span><span class="n">T</span>
   <span class="n">cond_mean</span> <span class="o">=</span> <span class="n">AB</span><span class="nd">@BB_inv@np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cond_labels</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
-  <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">cond_mean</span><span class="p">,</span> 
-                                        <span class="n">cond_cov</span><span class="p">,</span> 
+  <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">cond_mean</span><span class="p">,</span>
+                                        <span class="n">cond_cov</span><span class="p">,</span>
                                         <span class="n">size</span><span class="p">)</span>
 
   <span class="c1"># pack conditioned and predictions into a single tensor</span>
@@ -44531,12 +44539,12 @@ t1gFKm53AAAAAElFTkSuQmCC\
   <span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
   <span class="n">line1</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
   <span class="k">return</span> <span class="p">(</span><span class="n">line</span><span class="p">,)</span>
-  
+
 <span class="c1"># define the covariance matrix</span>
 <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
-                <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span> 
-                <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> 
-                <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span> 
+                <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
                 <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
 
 <span class="c1">#@markdown **You can use your own covariance matirx by updating the code!**</span>
@@ -44551,9 +44559,9 @@ t1gFKm53AAAAAElFTkSuQmCC\
 <span class="n">cond_inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cond_inds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)])</span>
 
 <span class="c1"># Generate data</span>
-<span class="n">uncond_preds</span> <span class="o">=</span> <span class="n">get_cond_predictions</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> 
-                                    <span class="n">cond_labels</span><span class="o">=</span><span class="n">cond_labels</span><span class="p">,</span> 
-                                    <span class="n">cond_inds</span><span class="o">=</span><span class="n">cond_inds</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
+<span class="n">uncond_preds</span> <span class="o">=</span> <span class="n">get_cond_predictions</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span>
+                                    <span class="n">cond_labels</span><span class="o">=</span><span class="n">cond_labels</span><span class="p">,</span>
+                                    <span class="n">cond_inds</span><span class="o">=</span><span class="n">cond_inds</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                                     <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
 
@@ -44569,16 +44577,16 @@ t1gFKm53AAAAAElFTkSuQmCC\
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Variable Index&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> 
-                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> 
-                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> 
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
-<span class="n">line1</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> 
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> 
-                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> 
+<span class="n">line1</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span>
                  <span class="n">markevery</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">cond_inds</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-<span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> 
+<span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span>
                         <span class="n">init_func</span><span class="o">=</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">([],</span> <span class="p">[])),</span>
                         <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">uncond_preds</span><span class="p">))</span>
 </pre></div>
@@ -44597,7 +44605,7 @@ t1gFKm53AAAAAElFTkSuQmCC\
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -44616,7 +44624,7 @@ jp-needs-light-background
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
 
@@ -44854,7 +44862,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider40c32b4358204379ad20d4bd23181677";
     var loop_select_id = "_anim_loop_select40c32b4358204379ad20d4bd23181677";
     var frames = new Array(20);
-    
+
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbAAAAEgCAYAAADVKCZpAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz\
 AAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0\
 dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAAgAElEQVR4nO3deXRV5aH+8edMmUcCIRgik0IgGAIk\
@@ -47974,7 +47982,7 @@ qAAAAABJRU5ErkJggg==\
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#@title  { run: &quot;auto&quot;, vertical-output: true, form-width: &quot;50%&quot;, display-mode: &quot;both&quot; }</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.html&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;jshtml&quot;</span>
@@ -48011,8 +48019,8 @@ qAAAAABJRU5ErkJggg==\
   <span class="n">cond_cov</span> <span class="o">=</span> <span class="n">AA</span><span class="o">-</span><span class="n">AB</span><span class="nd">@BB_inv@AB</span><span class="o">.</span><span class="n">T</span>
   <span class="n">cond_mean</span> <span class="o">=</span> <span class="n">AB</span><span class="nd">@BB_inv@np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cond_labels</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
-  <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">cond_mean</span><span class="p">,</span> 
-                                        <span class="n">cond_cov</span><span class="p">,</span> 
+  <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">cond_mean</span><span class="p">,</span>
+                                        <span class="n">cond_cov</span><span class="p">,</span>
                                         <span class="n">size</span><span class="p">)</span>
 
   <span class="n">cond_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cond_labels</span><span class="p">)))</span> <span class="o">+</span> \
@@ -48076,16 +48084,16 @@ qAAAAABJRU5ErkJggg==\
 <span class="n">cov</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">kernel_l</span><span class="p">),</span> <span class="n">sigma_f</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">kernel_sigma</span><span class="p">))</span>
 
 <span class="c1"># Generate data</span>
-<span class="n">uncond_preds</span> <span class="o">=</span> <span class="n">get_cond_predictions</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> 
-                                    <span class="n">cond_labels</span><span class="o">=</span><span class="n">cond_labels</span><span class="p">,</span> 
-                                    <span class="n">cond_inds</span><span class="o">=</span><span class="n">cond_inds</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> 
+<span class="n">uncond_preds</span> <span class="o">=</span> <span class="n">get_cond_predictions</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span>
+                                    <span class="n">cond_labels</span><span class="o">=</span><span class="n">cond_labels</span><span class="p">,</span>
+                                    <span class="n">cond_inds</span><span class="o">=</span><span class="n">cond_inds</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                                     <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
                                     <span class="n">noise</span><span class="o">=</span><span class="n">cond_noise</span><span class="p">)</span>
 
 
 <span class="c1">## Plot covariance and sampled data</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Covariance Matrix</span><span class="se">\n</span><span class="s1">l=</span><span class="si">{:.2f}</span><span class="s1">, sigma=</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kernel_l</span><span class="p">,</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Covariance Matrix</span><span class="se">\n</span><span class="s1">l=</span><span class="si">{:.2f}</span><span class="s1">, sigma=</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kernel_l</span><span class="p">,</span>
                                                              <span class="n">kernel_sigma</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -48095,16 +48103,16 @@ qAAAAABJRU5ErkJggg==\
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Variable Index&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> 
-                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> 
-                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> 
+<span class="n">line</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
-<span class="n">line1</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> 
-                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> 
-                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> 
+<span class="n">line1</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                 <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span>
                  <span class="n">markevery</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">cond_inds</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
-<span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span> 
+<span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">animate</span><span class="p">,</span>
                         <span class="n">init_func</span><span class="o">=</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">set_data</span><span class="p">([],</span> <span class="p">[])),</span>
                         <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">uncond_preds</span><span class="p">))</span>
 </pre></div>
@@ -48123,7 +48131,7 @@ qAAAAABJRU5ErkJggg==\
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -48142,7 +48150,7 @@ jp-needs-light-background
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 
 
@@ -48380,7 +48388,7 @@ input[type=range].anim-slider {
     var slider_id = "_anim_slider5e92fd058c3a451393ff8479b067c30c";
     var loop_select_id = "_anim_loop_select5e92fd058c3a451393ff8479b067c30c";
     var frames = new Array(20);
-    
+
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbAAAAEgCAYAAADVKCZpAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz\
 AAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0\
 dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAAgAElEQVR4nO3deVxVZeI/8M+9XFZZFREE3Bc22UlK\
