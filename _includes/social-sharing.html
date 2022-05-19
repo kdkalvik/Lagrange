@@ -1,5 +1,10 @@
 <div class="post-date">{{ site.data.settings.sharing_button_prompt }}</div>
 <div class="sharing-icons">
-  <a href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.github.url }}{{ page.url }}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.github.url }}{{ page.url }}&amp;title={{ page.title }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ site.baseurl }}{{ page.url }}&title={{ page.title }}&summary={{ page.description }}&source={{ site.title }}" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+  <a href="http://www.reddit.com/submit?url={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a>
+  <a href="whatsapp://send?text={{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+  <a href="https://mail.google.com/mail/?view=cm&su={{ page.title }}&body=Check out this site {{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a>
+  <a href="mailto:?subject={{ page.title }}&amp;body=Check out this site {{ site.url }}{{ site.baseurl }}{{ page.url }}" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
 </div>
