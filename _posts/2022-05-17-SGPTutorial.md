@@ -9,7 +9,21 @@ abstract: "My notes on the derivation of the variational sparse Gaussian process
 
 Gaussian processes are one of the most, if not the most, mathematically beautiful and elegant machine learning methods in history. We can use them for classification, regression, or generative problems. Also, the best part, they are probabilistic, so we can quantify the uncertainty in our predictions and have a lower risk of overfitting. 
 
-Gaussian processes are composed of latent random variables $\mathbf{f}$ each with a corresponding input point in $\mathbf{X}$. In sparse Gaussian processes, we augment the Gaussian process with additional data points $\mathbf{X}_u$ called inducing points, each with a corresponding latent variable $\mathbf{u}$. The inducing points have the following prior distribution, which is the same as the prior for the original latent variables $\mathbf{f}$.
+Gaussian processes are composed of latent random variables $f_i$ each with a corresponding input point in $x_i$, and the observed noisy label given by $y_i$
+
+$$
+f_i = f(x_i) \\
+\epsilon_i \sim \mathcal{N}(0, \sigma^2) \\
+y_i = f_i + \epsilon_i
+$$
+
+$$
+p(\mathbf{f} | \mathbf{X}) = \mathcal{N}(0, \mathbf{K}) \\
+p(\mathbf{y, f}) = p(\mathbf{y} | \mathbf{f}) p(\mathbf{f}) \\
+p(\mathbf{y}) = \int p(\mathbf{y, f}) d\mathbf{f}
+$$
+
+In sparse Gaussian processes, we augment the Gaussian process with additional data points $\mathbf{X}_u$ called inducing points, each with a corresponding latent variable $\mathbf{u}$. The inducing points have the following prior distribution, which is the same as the prior for the original latent variables $\mathbf{f}$.
 
 $$
 p(\mathbf{u} | \mathbf{X}_u) = \mathcal{N}(\mathbf{u} |0, \mathbf{K}_{uu}) \tag{1}
@@ -34,7 +48,7 @@ $$
 From the above joint distribution, we can compute the conditional distribution over $\mathbf{f}$ given $\mathbf{u}$, and the training data points $\mathbf{X}$ as follows 
 
 $$
-p(\mathbf{f} | \mathbf{u}, \mathbf{X}) = \mathcal{N}(\mathbf{f} | \mathbf{a}, \tilde{\mathbf{K}}) \tag{3} \\
+p(\mathbf{f} | \mathbf{X}, \mathbf{X}_u, \mathbf{u}) = \mathcal{N}(\mathbf{f} | \mathbf{a}, \tilde{\mathbf{K}}) \tag{3} \\
 \mathbf{a} = \mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{u} \\ 
 \tilde{\mathbf{K}} = \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf} \\
 $$
@@ -42,6 +56,110 @@ $$
 The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial). I will drop the explicit conditioning on the inputs $\mathbf{X}$ from here on to keep the notation clean.
 
 Alright, so why did we introduce the inducing points, and how will that help us reduce the computation cost of Gaussian processes? 
+
+$$\mathbf{f} = \{ \mathbf{u}, \mathbf{f}_{\neq u} \}$$
+
+From Jensen's inequality
+
+$$
+\begin{aligned}
+\log p(\mathbf{y}) &= \log \int p(\mathbf{y}, \mathbf{f}) d\mathbf{f} \\
+&\geq \int q(f) \log \frac{p(\mathbf{y, f})}{q(\mathbf{f})} d\mathbf{f} \\
+&= \mathcal{F}(q)
+\end{aligned}
+$$
+
+
+This bound it tight when 
+
+$$
+q(\mathbf{f}) = p(\mathbf{f|y})
+$$
+
+The true posterior for such a factorization is shown below
+
+$$
+\begin{aligned}
+p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq u} | \mathbf{u}) p(\mathbf{u|y})
+\end{aligned}
+$$
+
+But such a bound is intractable. Therefore we instead use the distribution below
+
+$$
+\begin{aligned}
+q(\mathbf{f}) &= q(\mathbf{f}_{\neq u}, \mathbf{u}) \\
+              &= p(\mathbf{f}_{\neq u} | \mathbf{u}) q(\mathbf{u})
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\mathcal{F}(q) = \int p(\mathbf{f|u}) q(\mathbf{u}) \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f}
+\end{aligned}
+$$
+
+But in we don't want to optimize for $q$ directly and intergrate it instead as it would avoid overfitting, giving us the following
+
+$$
+\begin{aligned}
+\mathcal{F}(q) &= \int p(\mathbf{f|u}) q(\mathbf{u}) \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f} d\mathbf{u} \\
+&= \int q(\mathbf{u}) \left( \int p(\mathbf{f|u})  \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f} \right) d\mathbf{u} \\
+&= \int q(\mathbf{u}) \left( \underbrace{\int p(\mathbf{f|u})  \log p(\mathbf{y|f}) d\mathbf{f}}_{G(\mathbf{u, y})} + \log \frac{p(\mathbf{u})}{q(\mathbf{u})} \right) d\mathbf{u} 
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+G(\mathbf{u, y}) &= \int p(\mathbf{f|u})  \log p(\mathbf{y|f}) d\mathbf{f} \\
+&= \int p(\mathbf{f|u}) \left( -\frac{n}{2} \log(2\pi \sigma^2) - \frac{1}{2 \sigma^2} Tr \left[ \mathbf{y}\mathbf{y}^\top - 2 \mathbf{y} \mathbf{f}^\top + \mathbf{f}\mathbf{f}^\top \right] \right) d\mathbf{f} \\
+&= -\frac{n}{2} \log(2\pi \sigma^2) - \frac{1}{2 \sigma^2} Tr \left[ \mathbf{y}\mathbf{y}^\top - 2 \mathbf{y} \mathbf{\alpha}^\top + \mathbf{\alpha}\mathbf{\alpha}^\top + \mathbf{K}_{ff} - \mathbf{Q} \right]  \\
+&= \log [\mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I)]  - \frac{1}{2 \sigma^2} Tr (\mathbf{K}_{ff} - \mathbf{Q})  \\
+\end{aligned}
+$$
+
+
+<details>
+  <summary>Follows from this equation</summary>  
+  $$
+  cov[\mathbf{f}|\mathbf{u}] = \mathbb{E}[\mathbf{f}\mathbf{f}^\top|\mathbf{u}] - \mathbb{E}[\mathbf{f}|\mathbf{u}]\mathbb{E}[\mathbf{f}|\mathbf{u}]^\top \\
+  \mathbb{E}[\mathbf{f}\mathbf{f}^\top|\mathbf{u}] = \mathbb{E}[\mathbf{f}|\mathbf{u}]\mathbb{E}[\mathbf{f}|\mathbf{u}]^\top cov[\mathbf{f}|\mathbf{u}]
+  $$
+  Also, because the trace operation is linear.
+</details>
+
+$$
+\begin{aligned}
+\mathcal{F}(q) &= \int q(\mathbf{u}) \log \frac{\mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{u} - \frac{1}{2 \sigma^2} Tr (\mathbf{K}_{ff} - \mathbf{Q}) \\
+\end{aligned}
+$$
+
+Now if we reverse the Jensen's inequality, we get the opitmal bound, which can be achieved with the optimal variational distribution $q^*(\mathbf{u})$
+
+$$
+\begin{aligned}
+\mathcal{F}(q) &= \log \int q(\mathbf{u}) \frac{\mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{u} - \frac{1}{2 \sigma^2} Tr (\mathbf{K}_{ff} - \mathbf{Q}) \\
+&= \log \int \mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I) p(\mathbf{u}) d\mathbf{u} - \frac{1}{2 \sigma^2} Tr (\mathbf{K}_{ff} - \mathbf{Q}) \\
+&= \log [\mathcal{N}(\mathbf{y} | 0, \sigma^2I + Q)] - \frac{1}{2 \sigma^2} Tr (\mathbf{K}_{ff} - \mathbf{Q}) \\
+\end{aligned}
+$$
+
+The optimal distribution $q^*(\mathbf{u})$ that gives rise to this bound is given by 
+$$
+\begin{aligned}
+q^*(\mathbf{u}) &\propto \mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I) p(\mathbf{u}) \\
+&= c \exp{ \left( \frac{1}{2} \mathbf{u}^\top (\mathbf{K}_{uu}^{-1} + \frac{1}{2 \sigma^2} \mathbf{K}_{uu}^{-1}\mathbf{K}_{uf}\mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}  ) \mathbf{u} + \frac{1}{2 \sigma^2} \mathbf{y}^\top \mathbf{K}_{uf} \mathbf{K}_{uu}^{-1} \mathbf{u} \right)}
+\end{aligned}
+$$
+
+where $c$ is a constant. Completing the quadratic form we recognize the Gaussian
+
+$$
+q^*(\mathbf{u}) = \mathcal{N}(\mathbf{u} | \sigma^{-2} \mathbf{K}_{uu} \mathbf{\Sigma}^{-1} \mathbf{K}_{uf} \mathbf{y}, \mathbf{K}_{uu} \mathbf{\Sigma}^{-1} \mathbf{K}_{uu})
+$$
+
+Where $$\mathbf{\Sigma} = \mathbf{K}_{uu} + \sigma^{-2}\mathbf{K}_{uf}\mathbf{K}_{fu}$$
 
 First, assuming we know the distribution of $\mathbf{u}$, our above formulation allows us to marginalize the inducing variables $\mathbf{u}$ and recover the original distribution over only the variables $\mathbf{f}$, which is used for exact inference in Gaussian processes.
 
@@ -54,12 +172,31 @@ p(\mathbf{f}) &= \int p(\mathbf{f}|\mathbf{u}) p(\mathbf{u}) d\mathbf{u} \\
 \end{aligned}
 $$
 
-And second, we can factorize the marginal distribution of the training set labels as follows 
+And second, the above $\mathbf{f}$ is still a Gaussian distibution with a covariance matrix of size $n \times n$ and thereby cost $\mathcal{O}(n^3)$ to invert and get the predictions of any test samples. The bottleneck is from the conditional $p(\mathbf{f}\|\mathbf{u})$ which models the relationship between the training and inducing latent variable. 
 
 $$
-p(\mathbf{y}, \mathbf{f}, \mathbf{u}) = p(\mathbf{y}|\mathbf{f})p(\mathbf{f}|\mathbf{u})p(\mathbf{u})
+p(\mathbf{f}_* | y) = \int p(\mathbf{f}_* | \mathbf{u}, \mathbf{f}) p(\mathbf{f} | \mathbf{u}, y) p(\mathbf{u} | y) d\mathbf{f} d\mathbf{u} \\
 $$
 
+Now assuming that the inducing variables $\mathbf{u}$ are a sufficient statistic for the training variables $\mathbf{f}$, i.e., $p(\mathbf{f} \| \mathbf{u}, y) = p(\mathbf{f} \| \mathbf{u})$, it would also imply 
+
+$$p(\mathbf{f}_* | \mathbf{u}, \mathbf{f}) = p(\mathbf{f}_* | \mathbf{u})$$
+
+
+$$
+\begin{aligned}
+p(\mathbf{f}_* | y) &= \int p(\mathbf{f}_* | \mathbf{u}) p(\mathbf{f} | \mathbf{u}) p(\mathbf{u} | y) d\mathbf{f} d\mathbf{u} \\
+&= \int p(\mathbf{f}_* | \mathbf{u}) p(\mathbf{u} | y) d\mathbf{u} \int p(\mathbf{f} | \mathbf{u}) d\mathbf{f} \\
+&= \int p(\mathbf{f}_* | \mathbf{u}) p(\mathbf{u} | y) d\mathbf{u}
+\end{aligned}
+$$
+
+$$
+m(x) = \mathbf{K}_{xu} \mathbf{K}_{uu}^{-1} \mu \\
+k(x, x^\prime) = k(x, x^\prime) - \mathbf{K}_{xu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ux^\prime} + \mathbf{K}_{xu} \mathbf{K}_{uu}^{-1} \mathbf{A} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ux^\prime} \\
+$$
+
+---
 
 # Appendix
 
