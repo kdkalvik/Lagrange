@@ -53,67 +53,71 @@ The problem with this approach is that it requires an inversion of a matrix of s
 ---
 
 # Sparse Gaussian processes
+#### Variational free energy (VFE) method [Titsias, 2009]
 
+Sparse Gaussian processes (SGPs) address the computational cost issues of Gaussian processes. Although there are numerous SGP approaches, Titsias's variational free energy (VFE) method is the most well known approach and has had a significant impact on the Gaussian process literature. 
 
-In sparse Gaussian processes, we augment the Gaussian process with additional data points $\mathbf{X}_u$ called inducing points, each with a corresponding latent variable $\mathbf{u}$. The inducing points have the following prior distribution, which is the same as the prior for the original latent variables $\mathbf{f}$.
+As the name suggests, VFE is a variational approach that we can use to find an approximate posterior distribution. The main idea behind variational methods is to pick a family of distributions over the variables of interest with its own variational parameters.
 
-$$
-p(\mathbf{u} | \mathbf{X}_u) = \mathcal{N}(\mathbf{u} |0, \mathbf{K}_{uu}) \tag{1}
-$$
-
-The joint distribution over the latent variables $\mathbf{f}$ and $\mathbf{u}$, which correspond to the training points $\mathbf{X}$, and inducing points $\mathbf{X}_u$ respectively, is given by the following
-
-$$
-p(\mathbf{f}, \mathbf{u} | \mathbf{X}, \mathbf{X}_u) = \mathcal{N}\left(
-    \begin{bmatrix}
-        \mathbf{f} \\
-        \mathbf{u}
-    \end{bmatrix} |
-    \mathbf{0}, 
-    \begin{bmatrix}
-        \mathbf{K}_{ff} & \mathbf{K}_{fu}\\
-        \mathbf{K}_{uf} & \mathbf{K}_{uu}
-    \end{bmatrix}
-\right) \tag{2}
-$$
-
-From the above joint distribution, we can compute the conditional distribution over $\mathbf{f}$ given $\mathbf{u}$, and the training data points $\mathbf{X}$ as follows 
-
-$$
-p(\mathbf{f} | \mathbf{X}, \mathbf{X}_u, \mathbf{u}) = \mathcal{N}(\mathbf{f} | \mathbf{a}, \tilde{\mathbf{K}}) \tag{3} \\
-\mathbf{a} = \mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{u} \\ 
-\tilde{\mathbf{K}} = \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf} \\
-$$
-
-The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial). 
-
-Alright, so why did we introduce the inducing points, and how will that help us reduce the computation cost of Gaussian processes? 
-
-$$\mathbf{f} = \{ \mathbf{u}, \mathbf{f}_{\neq u} \}$$
-
-From Jensen's inequality
+We optimize the variational distribution to be close to the true distribution being approximated. We use the evidence lower bound (ELBO) as the optimization objective that, when maximized, would result in a variational distribution close to the true distribution when optimized. The ELBO is derived as follows using Jensen's inequality on the log probability of the observed output variables $$\mathbf{y}$$
 
 $$
 \begin{aligned}
 \log p(\mathbf{y}) &= \log \int p(\mathbf{y}, \mathbf{f}) d\mathbf{f} \\
-&\geq \int q(f) \log \frac{p(\mathbf{y, f})}{q(\mathbf{f})} d\mathbf{f} \\
+&= \log \int p(\mathbf{y}, \mathbf{f}) \frac{q(\mathbf{f})}{q(\mathbf{f})} d\mathbf{f} \\
+&= \log \int q(\mathbf{f}) \frac{p(\mathbf{y}, \mathbf{f})}{q(\mathbf{f})} d\mathbf{f} \\
+&\geq \int q(\mathbf{f}) \log \frac{p(\mathbf{y, f})}{q(\mathbf{f})} d\mathbf{f} \\
+&= \mathbb{E}_q[\log p(\mathbf{y, f})] - \mathbb{E}_q[\log q(\mathbf{f})] \\
 &= \mathcal{F}(q)
 \end{aligned}
 $$
 
+This is the ELBO and $$q(\mathbf{f})$$ is the variational distribution. We choose a family of variational distributions (i.e., a parameterization of a distribution of the latent variables) such that the expectations are computationally efficient (Refer to Bishop's Pattern Recognition and Machine Learning book, which has a chapter on this topic for more details).
 
-This bound it tight when 
+The bound $\mathcal{F}(q)$ can also be written as the difference between the model log-marginal and the KL divergence between the variational distribution and the true posterior 
+
+$$
+\mathcal{F}(q) = \log p(\mathbf{y}) - \text{KL}(q(\mathbf{f}) || p(\mathbf{f|y}))
+$$
+
+<details>
+  <summary>This follows from an alternate form of the ELBO (click for details)</summary>  
+
+  From the product rule we know
+  $$
+  p(\mathbf{f} | \mathbf{y}) = \frac{p(\mathbf{f}, \mathbf{y})}{p(\mathbf{y})}
+  $$
+
+  Then using KL divergence we get the following
+
+  $$
+  \begin{aligned}
+  \text{KL}(q(\mathbf{f}) || p(\mathbf{f|y})) &= \mathbb{E}_q \left[ \log \frac{q({\mathbf{f}})}{p({\mathbf{f|y}})} \right] \\
+  &= \mathbb{E}_q \left[ \log q({\mathbf{f}}) \right] - \mathbb{E}_q \left[ \log p({\mathbf{f|y}}) \right] \\
+  &= \mathbb{E}_q \left[ \log q({\mathbf{f}}) \right] - \mathbb{E}_q \left[ \log p({\mathbf{f, y}}) \right] + \log p({\mathbf{y}}) \\
+  &= -(\mathbb{E}_q \left[ \log p({\mathbf{f, y}}) \right] - \mathbb{E}_q \left[ \log q({\mathbf{f}}) \right]) + \log p({\mathbf{y}}) \\
+  \end{aligned}
+  $$
+
+  This is the negative ELBO plus the log marginal probability of $\mathbf{y}$.
+</details>
+
+---
+
+
+The above bound $\mathcal{F}(q)$ will be tight when the variational distribution $q(\mathbf{f})$ is equal to the conditional distribution $p(\mathbf{f} \| \mathbf{y})$
 
 $$
 q(\mathbf{f}) = p(\mathbf{f|y})
 $$
 
-The true posterior for such a factorization is shown below
-
 $$
-\begin{aligned}
-p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq u} | \mathbf{u}) p(\mathbf{u|y})
-\end{aligned}
+\mathbf{f} = \{ \mathbf{u}, \mathbf{f}_{\neq u} \} \\
+$$
+
+The true posterior for such a factorization is shown below
+$$
+p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq u} | \mathbf{u}) p(\mathbf{u|y}) \\
 $$
 
 But such a bound is intractable. Therefore we instead use the distribution below
@@ -228,6 +232,43 @@ m(x) = \mathbf{K}_{xu} \mathbf{K}_{uu}^{-1} \mu \\
 k(x, x^\prime) = k(x, x^\prime) - \mathbf{K}_{xu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ux^\prime} + \mathbf{K}_{xu} \mathbf{K}_{uu}^{-1} \mathbf{A} \mathbf{K}_{uu}^{-1} \mathbf{K}_{ux^\prime} \\
 $$
 
+
+
+In sparse Gaussian processes, we augment the Gaussian process with additional data points $\mathbf{X}_u$ called inducing points, each with a corresponding latent variable $\mathbf{u}$. The inducing points have the following prior distribution, which is the same as the prior for the original latent variables $\mathbf{f}$.
+
+$$
+p(\mathbf{u} | \mathbf{X}_u) = \mathcal{N}(\mathbf{u} |0, \mathbf{K}_{uu}) \tag{1}
+$$
+
+The joint distribution over the latent variables $\mathbf{f}$ and $\mathbf{u}$, which correspond to the training points $\mathbf{X}$, and inducing points $\mathbf{X}_u$ respectively, is given by the following
+
+$$
+p(\mathbf{f}, \mathbf{u} | \mathbf{X}, \mathbf{X}_u) = \mathcal{N}\left(
+    \begin{bmatrix}
+        \mathbf{f} \\
+        \mathbf{u}
+    \end{bmatrix} |
+    \mathbf{0}, 
+    \begin{bmatrix}
+        \mathbf{K}_{ff} & \mathbf{K}_{fu}\\
+        \mathbf{K}_{uf} & \mathbf{K}_{uu}
+    \end{bmatrix}
+\right) \tag{2}
+$$
+
+From the above joint distribution, we can compute the conditional distribution over $\mathbf{f}$ given $\mathbf{u}$, and the training data points $\mathbf{X}$ as follows 
+
+$$
+p(\mathbf{f} | \mathbf{X}, \mathbf{X}_u, \mathbf{u}) = \mathcal{N}(\mathbf{f} | \mathbf{a}, \tilde{\mathbf{K}}) \tag{3} \\
+\mathbf{a} = \mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{u} \\ 
+\tilde{\mathbf{K}} = \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf} \\
+$$
+
+The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial). 
+
+Alright, so why did we introduce the inducing points, and how will that help us reduce the computation cost of Gaussian processes? 
+
+
 ---
 
 # Appendix
@@ -258,3 +299,19 @@ $$
 $$
 
 where $\|.\|$ denotes the determinant of a matrix.
+
+
+### Jensen's inequality
+$$
+f(\mathbb{E}[\mathbf{X}]) \geq \mathbb{E}[f(\mathbf{X})]
+$$
+
+You can learn more about Jensen's inequality [here](https://en.wikipedia.org/wiki/Jensen%27s_inequality)
+
+---
+
+# References
+
+* https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf
+
+* https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf
