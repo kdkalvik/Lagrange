@@ -7,21 +7,53 @@ tags: [documentation, sample]
 abstract: "My notes on the derivation of the variational sparse Gaussian process approach [Titsias 2009]."
 ---
 
-Gaussian processes are one of the most, if not the most, mathematically beautiful and elegant machine learning methods in history. We can use them for classification, regression, or generative problems. Also, the best part, they are probabilistic, so we can quantify the uncertainty in our predictions and have a lower risk of overfitting. 
+# Gaussian processes
 
-Gaussian processes are composed of latent random variables $f_i$ each with a corresponding input point in $x_i$, and the observed noisy label given by $y_i$
+[Gaussian processes](https://kdkalvik.github.io/gp-tutorial) are one of the most, if not the most, mathematically beautiful and elegant machine learning methods in history. We can use them for classification, regression, or generative problems. Also, the best part, they are probabilistic, so we can quantify the uncertainty in our predictions and have a lower risk of overfitting. 
+
+Given a regression task's training set $$\mathcal{D} = \{(\mathbf{x}_i, y_i), i = 1,...,n\}$$ with $n$ data samples consisting of inputs $$\mathbf{x}_i \in \mathbb{R}^d$$ and noisy outputs $y_i \in \mathbb{R}$, we can use Gaussian processes to predict the noise free outputs $$f_*$$ (or noisy $$y_*$$) at test locations $$\mathbf{x}_*$$. The approach assumes that the relationship between the inputs  $$\mathbf{x}_i$$ and outputs  $$y_i$$ is given by
 
 $$
-f_i = f(x_i) \\
-\epsilon_i \sim \mathcal{N}(0, \sigma^2) \\
-y_i = f_i + \epsilon_i
+y_i = f(\mathbf{x}_i) + \epsilon_i \quad \quad \text{where} \ \ \epsilon_i \sim \mathcal{N}(0, \sigma^2_{\text{noise}}) \\
 $$
+
+Here $$\sigma^2_{\text{noise}}$$ is the variance of the independent additive Gaussian noise in the observed outputs $$y_i$$. The latent function $$f(\mathbf{x})$$ models the noise free function of interest that explains the regression dataset. 
+
+Gaussian processes (GP) model datasets formulated as shown above by assuming a GP prior over the space of functions that could be used to explain the dataset, i.e., assumes a priori that the function values behave according to 
 
 $$
 p(\mathbf{f} | \mathbf{X}) = \mathcal{N}(0, \mathbf{K}) \\
-p(\mathbf{y, f}) = p(\mathbf{y} | \mathbf{f}) p(\mathbf{f}) \\
-p(\mathbf{y}) = \int p(\mathbf{y, f}) d\mathbf{f}
 $$
+
+where $$\mathbf{f} = [f_1, f_2,...,f_n]^\top$$ is a vector of latent function values, $$f_i = f(\mathbf{x_i})$$, $$\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2,...,\mathbf{x}_n]^\top$$ is a vector (or matrix) of inputs. And $\mathbf{K} \in \mathbb{R}^{n \times n}$ is a covariance matrix, whose entries $$\mathbf{K}_{ij}$$ are given by the kernel function $$k(x_i, x_j)$$. 
+
+GPs learn the latent function that explains the training data and use the kernel function to index and order the inputs $$\mathbf{x_i}$$ so that points closer to each other  (i.e., have high covariance value from the kernel function) have similar labels and vice versa. Inference in GPs to get the output predictions $$\mathbf{y}$$ for the training set input samples $$\mathbf{X}$$ entails marginalizing the latent function values $$\mathbf{f}$$  
+
+
+$$
+p(\mathbf{y, f} | \mathbf{X}) = p(\mathbf{y} | \mathbf{f}) p(\mathbf{f} | \mathbf{X}) \\
+p(\mathbf{y} | \mathbf{X}) = \int p(\mathbf{y, f} | \mathbf{X}) d\mathbf{f}
+$$
+
+I will drop the explicit conditioning on the inputs $\mathbf{X}$ from here on to reduce the notational complexity and assume that the corresponding inputs are always in the conditioning set.
+
+Inference on test points $$\mathbf{X_*}$$ to get the noise free predictions $$\mathbf{f}_*$$ (or noisy $$\mathbf{y}_*$$) can be done by considering the joint distribution over the training and test latent values, $$\mathbf{f}$$ and $$\mathbf{f}_*$$, and using Gaussian conditioning to marginalizing the training set latent variables as shown below
+
+$$
+\begin{aligned}
+p(\mathbf{f}, \mathbf{f}_* | \mathbf{y}) &= \frac{p(\mathbf{f}, \mathbf{f}_*)p(\mathbf{y} | \mathbf{f})}{p(\mathbf{y})} \\
+p(\mathbf{f}_* | \mathbf{y}) &= \int \frac{p(\mathbf{f}, \mathbf{f}_*)p(\mathbf{y} | \mathbf{f})}{p(\mathbf{y})} d\mathbf{f} \\
+&= \mathcal{N}(\mathbf{K}_{*f}(\mathbf{K}_{ff} + \sigma_{\text{noise}}^{2}I)^{-1}\mathbf{y}, \
+              \mathbf{K}_{**}-\mathbf{K}_{*f}(\mathbf{K}_{ff} + \sigma_{\text{noise}}^{2}I)^{-1}\mathbf{K}_{f*})
+\end{aligned}
+$$
+
+The problem with this approach is that it requires an inversion of a matrix of size $n \times n$, which is a $\mathcal{O}(n^3)$ operation, where $n$ is the number of training set samples. Thus this method can handle at most a few thousand training samples. Checkout my [tutorial on Gaussian processes](https://kdkalvik.github.io/gp-tutorial) for a comprehensive explanation. 
+
+---
+
+# Sparse Gaussian processes
+
 
 In sparse Gaussian processes, we augment the Gaussian process with additional data points $\mathbf{X}_u$ called inducing points, each with a corresponding latent variable $\mathbf{u}$. The inducing points have the following prior distribution, which is the same as the prior for the original latent variables $\mathbf{f}$.
 
@@ -53,7 +85,7 @@ p(\mathbf{f} | \mathbf{X}, \mathbf{X}_u, \mathbf{u}) = \mathcal{N}(\mathbf{f} | 
 \tilde{\mathbf{K}} = \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf} \\
 $$
 
-The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial). I will drop the explicit conditioning on the inputs $\mathbf{X}$ from here on to keep the notation clean.
+The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial). 
 
 Alright, so why did we introduce the inducing points, and how will that help us reduce the computation cost of Gaussian processes? 
 
