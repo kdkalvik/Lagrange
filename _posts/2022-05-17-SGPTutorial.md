@@ -19,7 +19,7 @@ $$
 
 Here $$\sigma^2_{\text{noise}}$$ is the variance of the independent additive Gaussian noise in the observed outputs $$y_i$$. The latent function $$f(\mathbf{x})$$ models the noise free function of interest that explains the regression dataset. 
 
-Gaussian processes (GP) model datasets formulated as shown above by assuming a GP prior over the space of functions that could be used to explain the dataset, i.e., assumes a priori that the function values behave according to 
+Gaussian processes (GP) model datasets formulated as shown above by assuming a GP prior over the space of functions that could be used to explain the dataset, i.e., assumes a priori that the function values behave according to the following
 
 $$
 p(\mathbf{f} | \mathbf{X}) = \mathcal{N}(0, \mathbf{K}) \\
@@ -61,6 +61,18 @@ As the name suggests, VFE is a variational approach that we can use to find an a
 
 We optimize the variational distribution to be close to the true distribution being approximated. We use the evidence lower bound (ELBO) as the optimization objective that, when maximized, would result in a variational distribution close to the true distribution when optimized. The ELBO is derived as follows using Jensen's inequality on the log probability of the observed output variables $$\mathbf{y}$$
 
+<details markdown=1>
+  <summary>Click for details on Jensen's inequality</summary>  
+  Jensen's inequality states that the following holds for convex functions
+
+  $$
+  f(\mathbb{E}[\mathbf{X}]) \geq \mathbb{E}[f(\mathbf{X})]
+  $$
+
+  The $\log$ operation is a convex function. You can learn more about Jensen's inequality [here](https://en.wikipedia.org/wiki/Jensen%27s_inequality).
+
+</details>
+
 $$
 \begin{aligned}
 \log p(\mathbf{y}) &= \log \int p(\mathbf{y}, \mathbf{f}) d\mathbf{f} \\
@@ -80,7 +92,7 @@ $$
 \mathcal{F}(q) = \log p(\mathbf{y}) - \text{KL}(q(\mathbf{f}) || p(\mathbf{f|y}))
 $$
 
-<details>
+<details markdown=1>
   <summary>This follows from an alternate form of the ELBO (click for details)</summary>  
 
   From the product rule we know
@@ -102,25 +114,19 @@ $$
   This is the negative ELBO plus the log marginal probability of $\mathbf{y}$.
 </details>
 
----
-
-
-The above bound $\mathcal{F}(q)$ will be tight when the variational distribution $q(\mathbf{f})$ is equal to the conditional distribution $p(\mathbf{f} \| \mathbf{y})$
+Therefore, the above bound $\mathcal{F}(q)$ will be tight when the variational distribution $q(\mathbf{f})$ is equal to the conditional distribution $p(\mathbf{f} \| \mathbf{y})$. This is because when the following equality holds, the $\text{KL}$ term vanishes and the log-marginal is independent of the variational distribution $q(\mathbf{f})$. 
 
 $$
 q(\mathbf{f}) = p(\mathbf{f|y})
 $$
 
+But such a variational distribution is intractable. Therefore, we instead introduce explicit pseudo-points $$\mathbf{X}_u$$ with latent variables $$\mathbf{u}$$ such that the set of latent variables is now defined as follows
+
 $$
 \mathbf{f} = \{ \mathbf{u}, \mathbf{f}_{\neq u} \} \\
 $$
 
-The true posterior for such a factorization is shown below
-$$
-p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq u} | \mathbf{u}) p(\mathbf{u|y}) \\
-$$
-
-But such a bound is intractable. Therefore we instead use the distribution below
+Here the latent variables $$\mathbf{f}_{\neq u}$$ correspond to the training set inputs $$\mathbf{X}$$. Using the updated latent variables $$\mathbf{f}$$, we can factorize the variational distribution $q(\mathbf{f})$ as follows
 
 $$
 \begin{aligned}
@@ -128,6 +134,16 @@ q(\mathbf{f}) &= q(\mathbf{f}_{\neq u}, \mathbf{u}) \\
               &= p(\mathbf{f}_{\neq u} | \mathbf{u}) q(\mathbf{u})
 \end{aligned}
 $$
+
+The above variational distribution is the essence of sparse Gaussian processes. It assumes that the latent variables $$\mathbf{f}_{\neq u}$$ are independent of the training set outputs $$\mathbf{y}$$ given the inducing point latent variables $$\mathbf{u}$$. Now contrast the above variational distribution factorization with the true posterior distribution's factorization shown below
+
+$$
+p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq u} | \mathbf{y}, \mathbf{u}) p(\mathbf{u|y}) \\
+$$
+
+Our variational distribution over $$q(\mathbf{u})$$ is optimized using the training data, but it isn't explicitly conditioned on the training set outputs $$\mathbf{y}$$, and similarly, the conditional $p(\mathbf{f}_{\neq u} \| \mathbf{y}, \mathbf{u})$ is also independent of the training set outputs $$\mathbf{y}$$
+
+---
 
 $$
 \begin{aligned}
@@ -299,14 +315,6 @@ $$
 $$
 
 where $\|.\|$ denotes the determinant of a matrix.
-
-
-### Jensen's inequality
-$$
-f(\mathbb{E}[\mathbf{X}]) \geq \mathbb{E}[f(\mathbf{X})]
-$$
-
-You can learn more about Jensen's inequality [here](https://en.wikipedia.org/wiki/Jensen%27s_inequality)
 
 ---
 
