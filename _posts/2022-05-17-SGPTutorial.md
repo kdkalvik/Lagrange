@@ -11,7 +11,7 @@ abstract: "My notes on the derivation of the variational sparse Gaussian process
 
 [Gaussian processes](https://kdkalvik.github.io/gp-tutorial) are one of the most, if not the most, mathematically beautiful and elegant machine learning methods in history. We can use them for classification, regression, or generative problems. Also, the best part, they are probabilistic, so we can quantify the uncertainty in our predictions and have a lower risk of overfitting. 
 
-Given a regression task's training set $$\mathcal{D} = \{(\mathbf{x}_i, y_i), i = 1,...,n\}$$ with $n$ data samples consisting of inputs $$\mathbf{x}_i \in \mathbb{R}^d$$ and noisy outputs $y_i \in \mathbb{R}$, we can use Gaussian processes to predict the noise free outputs $$f_*$$ (or noisy $$y_*$$) at test locations $$\mathbf{x}_*$$. The approach assumes that the relationship between the inputs  $$\mathbf{x}_i$$ and outputs  $$y_i$$ is given by
+Given a regression task's training set $$\mathcal{D} = \{(\mathbf{x}_i, y_i), i = 1,...,n\}$$ with $$n$$ data samples consisting of inputs $$\mathbf{x}_i \in \mathbb{R}^d$$ and noisy outputs $$y_i \in \mathbb{R}$$, we can use Gaussian processes to predict the noise free outputs $$f_*$$ (or noisy $$y_*$$) at test locations $$\mathbf{x}_*$$. The approach assumes that the relationship between the inputs  $$\mathbf{x}_i$$ and outputs  $$y_i$$ is given by
 
 $$
 y_i = f(\mathbf{x}_i) + \epsilon_i \quad \quad \text{where} \ \ \epsilon_i \sim \mathcal{N}(0, \sigma^2_{\text{noise}}) \\
@@ -25,7 +25,7 @@ $$
 p(\mathbf{f} | \mathbf{X}) = \mathcal{N}(0, \mathbf{K}) \\
 $$
 
-where $$\mathbf{f} = [f_1, f_2,...,f_n]^\top$$ is a vector of latent function values, $$f_i = f(\mathbf{x_i})$$, $$\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2,...,\mathbf{x}_n]^\top$$ is a vector (or matrix) of inputs. And $\mathbf{K} \in \mathbb{R}^{n \times n}$ is a covariance matrix, whose entries $$\mathbf{K}_{ij}$$ are given by the kernel function $$k(x_i, x_j)$$. 
+where $$\mathbf{f} = [f_1, f_2,...,f_n]^\top$$ is a vector of latent function values, $$f_i = f(\mathbf{x_i})$$, $$\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2,...,\mathbf{x}_n]^\top$$ is a vector (or matrix) of inputs. And $$\mathbf{K} \in \mathbb{R}^{n \times n}$$ is a covariance matrix, whose entries $$\mathbf{K}_{ij}$$ are given by the kernel function $$k(x_i, x_j)$$. 
 
 GPs learn the latent function that explains the training data and use the kernel function to index and order the inputs $$\mathbf{x_i}$$ so that points closer to each other  (i.e., have high covariance value from the kernel function) have similar labels and vice versa. Inference in GPs to get the output predictions $$\mathbf{y}$$ for the training set input samples $$\mathbf{X}$$ entails marginalizing the latent function values $$\mathbf{f}$$  
 
@@ -48,7 +48,7 @@ p(\mathbf{f}_* | \mathbf{y}) &= \int \frac{p(\mathbf{f}, \mathbf{f}_*)p(\mathbf{
 \end{aligned}
 $$
 
-The problem with this approach is that it requires an inversion of a matrix of size $n \times n$, which is a $\mathcal{O}(n^3)$ operation, where $n$ is the number of training set samples. Thus this method can handle at most a few thousand training samples. Checkout my [tutorial on Gaussian processes](https://kdkalvik.github.io/gp-tutorial) for a comprehensive explanation. 
+The problem with this approach is that it requires an inversion of a matrix of size $$n \times n$$, which is a $$\mathcal{O}(n^3)$$ operation, where $$n$$ is the number of training set samples. Thus this method can handle at most a few thousand training samples. Checkout my [tutorial on Gaussian processes](https://kdkalvik.github.io/gp-tutorial) for a comprehensive explanation. 
 
 ---
 
@@ -86,7 +86,7 @@ $$
 
 This is the ELBO and $$q(\mathbf{f})$$ is the variational distribution. We choose a family of variational distributions (i.e., a parameterization of a distribution of the latent variables) such that the expectations are computationally efficient (Refer to Bishop's Pattern Recognition and Machine Learning book, which has a chapter on this topic for more details).
 
-The bound $\mathcal{F}(q)$ can also be written as the difference between the model log-marginal and the KL divergence between the variational distribution and the true posterior 
+The bound $$\mathcal{F}(q)$$ can also be written as the difference between the model log-marginal and the KL divergence between the variational distribution and the true posterior 
 
 $$
 \mathcal{F}(q) = \log p(\mathbf{y}) - \text{KL}(q(\mathbf{f}) || p(\mathbf{f|y}))
@@ -114,7 +114,7 @@ $$
   This is the negative ELBO plus the log marginal probability of $\mathbf{y}$.
 </details>
 
-Therefore, the above bound $\mathcal{F}(q)$ will be tight when the variational distribution $q(\mathbf{f})$ is equal to the conditional distribution $p(\mathbf{f} \| \mathbf{y})$. This is because when the following equality holds, the $\text{KL}$ term vanishes and the log-marginal is independent of the variational distribution $q(\mathbf{f})$. 
+Therefore, the above bound $$\mathcal{F}(q)$$ will be tight when the variational distribution $$q(\mathbf{f})$$ is equal to the conditional distribution $$p(\mathbf{f} \mid \mathbf{y})$$. This is because when the following equality holds, the $$\text{KL}$$ term vanishes and the log-marginal is independent of the variational distribution $$q(\mathbf{f})$$. 
 
 $$
 q(\mathbf{f}) = p(\mathbf{f|y})
@@ -123,44 +123,51 @@ $$
 But such a variational distribution is intractable. Therefore, we instead introduce explicit pseudo-points $$\mathbf{X}_u$$ with latent variables $$\mathbf{u}$$ such that the set of latent variables is now defined as follows
 
 $$
-\mathbf{f} = \{ \mathbf{u}, \mathbf{f}_{\neq u} \} \\
+\mathbf{f} = \{ \mathbf{u}, \mathbf{f}_{\neq \mathbf{u}} \} \\
 $$
 
-Here the latent variables $$\mathbf{f}_{\neq u}$$ correspond to the training set inputs $$\mathbf{X}$$. Using the updated latent variables $$\mathbf{f}$$, we can factorize the variational distribution $q(\mathbf{f})$ as follows
-
-$$
-\begin{aligned}
-q(\mathbf{f}) &= q(\mathbf{f}_{\neq u}, \mathbf{u}) \\
-              &= p(\mathbf{f}_{\neq u} | \mathbf{u}) q(\mathbf{u})
-\end{aligned}
-$$
-
-The above variational distribution is the essence of sparse Gaussian processes. It assumes that the latent variables $$\mathbf{f}_{\neq u}$$ are independent of the training set outputs $$\mathbf{y}$$ given the inducing point latent variables $$\mathbf{u}$$. Now contrast the above variational distribution factorization with the true posterior distribution's factorization shown below
-
-$$
-p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq u} | \mathbf{y}, \mathbf{u}) p(\mathbf{u|y}) \\
-$$
-
-Our variational distribution over $$q(\mathbf{u})$$ is optimized using the training data, but it isn't explicitly conditioned on the training set outputs $$\mathbf{y}$$, and similarly, the conditional $p(\mathbf{f}_{\neq u} \| \mathbf{y}, \mathbf{u})$ is also independent of the training set outputs $$\mathbf{y}$$
-
----
+Here the latent variables $$\mathbf{f}_{\neq \mathbf{u}}$$ correspond to the training set inputs $$\mathbf{X}$$. Using the updated latent variables $$\mathbf{f}$$, we can factorize the variational distribution $$q(\mathbf{f})$$ as follows
 
 $$
 \begin{aligned}
-\mathcal{F}(q) = \int p(\mathbf{f|u}) q(\mathbf{u}) \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f}
+q(\mathbf{f}) &= q(\mathbf{f}_{\neq \mathbf{u}}, \mathbf{u}) \\
+              &= p(\mathbf{f}_{\neq \mathbf{u}} | \mathbf{u}) q(\mathbf{u})
 \end{aligned}
 $$
 
-But in we don't want to optimize for $q$ directly and intergrate it instead as it would avoid overfitting, giving us the following
+The above variational distribution is the essence of sparse Gaussian processes. It assumes that the latent variables $$\mathbf{f}_{\neq \mathbf{u}}$$ which correspond to the training set inputs $$\mathbf{X}$$ are independent of the training set outputs $$\mathbf{y}$$ given the inducing point latent variables $$\mathbf{u}$$. Now contrast the above variational distribution factorization with the true posterior distribution's factorization shown below
+
+$$
+p(\mathbf{f}|\mathbf{y}) = p(\mathbf{f}_{\neq \mathbf{u}} | \mathbf{y}, \mathbf{u}) p(\mathbf{u|y}) \\
+$$
+
+Our variational distribution over $$q(\mathbf{u})$$ is optimized using the training data, but it isn't explicitly conditioned on the training set outputs $$\mathbf{y}$$, and similarly, the conditional $$p(\mathbf{f}_{\neq \mathbf{u}} \mid \mathbf{u})$$ used in $$q(\mathbf{f})$$ is also independent of the training set outputs $$\mathbf{y}$$ given the latent variables $$\mathbf{u}$$. 
+
+Also note that even though the conditional $$p(\mathbf{f}_{\neq \mathbf{u}} \mid \mathbf{u})$$ is not the same as the conditional used in $$p(\mathbf{f} \mid \mathbf{y})$$, it is still not a variational distribution as it can be calculated using Gaussian conditioning. 
+
+Now that we have a variationl distribution, we can substute it into the bound $$\mathcal{F}(q)$$. 
+
+$$
+\begin{aligned}
+\mathcal{F}(q) &= \int q(\mathbf{f}) \log \frac{p(\mathbf{y, f})}{q(\mathbf{f})} d\mathbf{f} \\
+&= \int p(\mathbf{f}_{\neq \mathbf{u}} | \mathbf{u}) q(\mathbf{u}) \log \frac{p(\mathbf{y|f}) \cancel{p(\mathbf{f}_{\neq \mathbf{u}} | \mathbf{u})} p(\mathbf{u})}{\cancel{p(\mathbf{f}_{\neq \mathbf{u}} | \mathbf{u})} q(\mathbf{u})} d\mathbf{f} \\
+&= \int p(\mathbf{f}_{\neq \mathbf{u}} | \mathbf{u}) q(\mathbf{u}) \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f}
+\end{aligned}
+$$
+
+Here we were able to factorize the joint distribution $$p(\mathbf{y, f})$$ as shown above only because of the assumption we made about $$\mathbf{f}$$ being independent of $$\mathbf{y}$$ given $$\mathbf{u}$$. I will drop the "$$\neq \mathbf{u}$$" subscript for $$\mathbf{f}$$ from here on to keep the notation clean. 
+
+Note that in the above bound, we left the variational distribution un-integrated, so the bound would not correspond to the $$\log p(\mathbf{y})$$. Therefore we integrate it and get the following bound
 
 $$
 \begin{aligned}
 \mathcal{F}(q) &= \int p(\mathbf{f|u}) q(\mathbf{u}) \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f} d\mathbf{u} \\
 &= \int q(\mathbf{u}) \left( \int p(\mathbf{f|u})  \log \frac{p(\mathbf{y|f}) p(\mathbf{u})}{q(\mathbf{u})} d\mathbf{f} \right) d\mathbf{u} \\
-&= \int q(\mathbf{u}) \left( \underbrace{\int p(\mathbf{f|u})  \log p(\mathbf{y|f}) d\mathbf{f}}_{G(\mathbf{u, y})} + \log \frac{p(\mathbf{u})}{q(\mathbf{u})} \right) d\mathbf{u} 
+&= \int q(\mathbf{u}) \left( \underbrace{\int p(\mathbf{f|u})  \log p(\mathbf{y|f}) d\mathbf{f}}_{G(\mathbf{u, y})} + \log \frac{p(\mathbf{u})}{q(\mathbf{u})} \right) d\mathbf{u}
 \end{aligned}
 $$
 
+The inner integral over $$\mathbf{f}$$ can be computed as follows
 
 $$
 \begin{aligned}
@@ -171,9 +178,8 @@ G(\mathbf{u, y}) &= \int p(\mathbf{f|u})  \log p(\mathbf{y|f}) d\mathbf{f} \\
 \end{aligned}
 $$
 
-
 <details>
-  <summary>Follows from this equation</summary>  
+  <summary>Follows from this equation</summary>
   $$
   cov[\mathbf{f}|\mathbf{u}] = \mathbb{E}[\mathbf{f}\mathbf{f}^\top|\mathbf{u}] - \mathbb{E}[\mathbf{f}|\mathbf{u}]\mathbb{E}[\mathbf{f}|\mathbf{u}]^\top \\
   \mathbb{E}[\mathbf{f}\mathbf{f}^\top|\mathbf{u}] = \mathbb{E}[\mathbf{f}|\mathbf{u}]\mathbb{E}[\mathbf{f}|\mathbf{u}]^\top cov[\mathbf{f}|\mathbf{u}]
@@ -187,7 +193,9 @@ $$
 \end{aligned}
 $$
 
-Now if we reverse the Jensen's inequality, we get the opitmal bound, which can be achieved with the optimal variational distribution $q^*(\mathbf{u})$
+---
+
+Now if we reverse the Jensen's inequality in the bound $$\mathcal{F}(q)$$, we get the opitmal bound, which can be achieved with the optimal variational distribution $$q^*(\mathbf{u})$$
 
 $$
 \begin{aligned}
@@ -197,7 +205,7 @@ $$
 \end{aligned}
 $$
 
-The optimal distribution $q^*(\mathbf{u})$ that gives rise to this bound is given by 
+The optimal distribution $$q^*(\mathbf{u})$$ that gives rise to this bound is given by
 $$
 \begin{aligned}
 q^*(\mathbf{u}) &\propto \mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I) p(\mathbf{u}) \\
@@ -205,13 +213,15 @@ q^*(\mathbf{u}) &\propto \mathcal{N}(\mathbf{y} | \mathbf{\alpha}, \sigma^2I) p(
 \end{aligned}
 $$
 
-where $c$ is a constant. Completing the quadratic form we recognize the Gaussian
+where $$c$$ is a constant. Completing the quadratic form we recognize the Gaussian
 
 $$
 q^*(\mathbf{u}) = \mathcal{N}(\mathbf{u} | \sigma^{-2} \mathbf{K}_{uu} \mathbf{\Sigma}^{-1} \mathbf{K}_{uf} \mathbf{y}, \mathbf{K}_{uu} \mathbf{\Sigma}^{-1} \mathbf{K}_{uu})
 $$
 
 Where $$\mathbf{\Sigma} = \mathbf{K}_{uu} + \sigma^{-2}\mathbf{K}_{uf}\mathbf{K}_{fu}$$
+
+---
 
 First, assuming we know the distribution of $\mathbf{u}$, our above formulation allows us to marginalize the inducing variables $\mathbf{u}$ and recover the original distribution over only the variables $\mathbf{f}$, which is used for exact inference in Gaussian processes.
 
@@ -220,17 +230,17 @@ $$
 p(\mathbf{f}) &= \int p(\mathbf{f}|\mathbf{u}) p(\mathbf{u}) d\mathbf{u} \\
 &= \int \underbrace{\mathcal{N}(\mathbf{f} | \mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{u}, \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf})}_{\text{Equation (3)}} \times \underbrace{\mathcal{N}(\mathbf{u} |0, \mathbf{K}_{uu})}_{\text{Equation (1)}} d\mathbf{u}\\
 &= \underbrace{\mathcal{N}(\mathbf{f}|\mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{0}, \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf} + \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf})}_{\text{Equation (A.1) in the appendix}} \\
-&= \mathcal{N}(\mathbf{f}| \mathbf{0}, \mathbf{K}_{ff}) 
+&= \mathcal{N}(\mathbf{f}| \mathbf{0}, \mathbf{K}_{ff})
 \end{aligned}
 $$
 
-And second, the above $\mathbf{f}$ is still a Gaussian distibution with a covariance matrix of size $n \times n$ and thereby cost $\mathcal{O}(n^3)$ to invert and get the predictions of any test samples. The bottleneck is from the conditional $p(\mathbf{f}\|\mathbf{u})$ which models the relationship between the training and inducing latent variable. 
+And second, the above $\mathbf{f}$ is still a Gaussian distibution with a covariance matrix of size $n \times n$ and thereby cost $\mathcal{O}(n^3)$ to invert and get the predictions of any test samples. The bottleneck is from the conditional $p(\mathbf{f}\|\mathbf{u})$ which models the relationship between the training and inducing latent variable.
 
 $$
 p(\mathbf{f}_* | y) = \int p(\mathbf{f}_* | \mathbf{u}, \mathbf{f}) p(\mathbf{f} | \mathbf{u}, y) p(\mathbf{u} | y) d\mathbf{f} d\mathbf{u} \\
 $$
 
-Now assuming that the inducing variables $\mathbf{u}$ are a sufficient statistic for the training variables $\mathbf{f}$, i.e., $p(\mathbf{f} \| \mathbf{u}, y) = p(\mathbf{f} \| \mathbf{u})$, it would also imply 
+Now assuming that the inducing variables $\mathbf{u}$ are a sufficient statistic for the training variables $\mathbf{f}$, i.e., $p(\mathbf{f} \| \mathbf{u}, y) = p(\mathbf{f} \| \mathbf{u})$, it would also imply
 
 $$p(\mathbf{f}_* | \mathbf{u}, \mathbf{f}) = p(\mathbf{f}_* | \mathbf{u})$$
 
@@ -264,7 +274,7 @@ p(\mathbf{f}, \mathbf{u} | \mathbf{X}, \mathbf{X}_u) = \mathcal{N}\left(
         \mathbf{f} \\
         \mathbf{u}
     \end{bmatrix} |
-    \mathbf{0}, 
+    \mathbf{0},
     \begin{bmatrix}
         \mathbf{K}_{ff} & \mathbf{K}_{fu}\\
         \mathbf{K}_{uf} & \mathbf{K}_{uu}
@@ -272,17 +282,17 @@ p(\mathbf{f}, \mathbf{u} | \mathbf{X}, \mathbf{X}_u) = \mathcal{N}\left(
 \right) \tag{2}
 $$
 
-From the above joint distribution, we can compute the conditional distribution over $\mathbf{f}$ given $\mathbf{u}$, and the training data points $\mathbf{X}$ as follows 
+From the above joint distribution, we can compute the conditional distribution over $\mathbf{f}$ given $\mathbf{u}$, and the training data points $\mathbf{X}$ as follows
 
 $$
 p(\mathbf{f} | \mathbf{X}, \mathbf{X}_u, \mathbf{u}) = \mathcal{N}(\mathbf{f} | \mathbf{a}, \tilde{\mathbf{K}}) \tag{3} \\
-\mathbf{a} = \mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{u} \\ 
+\mathbf{a} = \mathbf{K}_{fu}\mathbf{K}_{uu}^{-1}\mathbf{u} \\
 \tilde{\mathbf{K}} = \mathbf{K}_{ff} - \mathbf{K}_{fu} \mathbf{K}_{uu}^{-1} \mathbf{K}_{uf} \\
 $$
 
-The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial). 
+The above conditional follows from the standard Gaussian conditioning operation used in [Gaussian processes](https://kdkalvik.github.io/gp-tutorial).
 
-Alright, so why did we introduce the inducing points, and how will that help us reduce the computation cost of Gaussian processes? 
+Alright, so why did we introduce the inducing points, and how will that help us reduce the computation cost of Gaussian processes?
 
 
 ---
@@ -291,7 +301,7 @@ Alright, so why did we introduce the inducing points, and how will that help us 
 
 ### Gaussian margnial and condititonal distributions
 
-If we have a marginal Gaussian distribution for $\mathbf{u}$ and a conditional Gaussian distribution for $\mathbf{f}$ given $\mathbf{u}$ as shown below, the marginal distribution of $\mathbf{f}$ is given as follows 
+If we have a marginal Gaussian distribution for $\mathbf{u}$ and a conditional Gaussian distribution for $\mathbf{f}$ given $\mathbf{u}$ as shown below, the marginal distribution of $\mathbf{f}$ is given as follows
 
 $$
 \begin{aligned}
