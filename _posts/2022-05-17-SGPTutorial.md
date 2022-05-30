@@ -27,8 +27,7 @@ $$
 
 where $$\mathbf{f} = [f_1, f_2,...,f_n]^\top$$ is a vector of latent function values, $$f_i = f(\mathbf{x_i})$$, $$\mathbf{X} = [\mathbf{x}_1, \mathbf{x}_2,...,\mathbf{x}_n]^\top$$ is a vector (or matrix) of inputs. And $$\mathbf{K} \in \mathbb{R}^{n \times n}$$ is a covariance matrix, whose entries $$\mathbf{K}_{ij}$$ are given by the kernel function $$k(x_i, x_j)$$. 
 
-GPs learn the latent function that explains the training data and use the kernel function to index and order the inputs $$\mathbf{x_i}$$ so that points closer to each other  (i.e., have high covariance value from the kernel function) have similar labels and vice versa. Inference in GPs to get the output predictions $$\mathbf{y}$$ for the training set input samples $$\mathbf{X}$$ entails marginalizing the latent function values $$\mathbf{f}$$  
-
+GPs use the kernel function to index and order the inputs $$\mathbf{x_i}$$ so that points closer to each other (i.e., have high covariance value from the kernel function) have similar labels and vice versa. The kernel function parameters are tuned using Type II maximum likelihood so that the GP accurately models the latent function of trainig data. Inference in GPs to get the output predictions $$\mathbf{y}$$ for the training set input samples $$\mathbf{X}$$ entails marginalizing the latent function values $$\mathbf{f}$$
 
 $$
 p(\mathbf{y, f} | \mathbf{X}) = p(\mathbf{y} | \mathbf{f}) p(\mathbf{f} | \mathbf{X}) \\
