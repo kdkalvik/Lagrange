@@ -29,6 +29,7 @@ abstract: "A list of lectures on various important topics"
         <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>      
     </thead>
     <tbody>
+        <tr class="data_row"><td><a href="	https://wumbo.net/	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Basic math	</td></tr>
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Essence of calculus 	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Essence of linear algebra 	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Differential equations	</td></tr>	
