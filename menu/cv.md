@@ -8,7 +8,7 @@ permalink: /cv
 <center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text" aria-hidden="true"></i></span></a></b></center>
 
 # Research Interests
-I am interested in mathematical optimization and Bayesian learning. Specifically, methods that can reliably express prediction uncertainty, make open-set predictions, and incorporate prior domain knowledge. I am currently researching sparse and deep Gaussian processes.
+I am interested in Bayesian learning and mathematical optimization. Specifically, methods that can reliably express prediction uncertainty, make open-set predictions, and incorporate prior domain knowledge. I am currently researching sparse Gaussian processes to address sensor placement and source localization problems. 
 
 # Research Experience
 - **Methane Leak Rate Estimation July**\\
