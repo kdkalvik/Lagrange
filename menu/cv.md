@@ -60,6 +60,20 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
 - **Programming Languages:** Python, C/C++, Matlab, Bash Scripting, SQL
 - **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), SciPy, Pandas, Pyro, GPFlow, Numpy
 
+# Teaching Experience
+- **Teaching Assistant**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021---May 2022 </span>\\
+  Taught and mentored graduate students in the following courses\\
+  \-Machine Learning (ITCS8156)\\
+  \-Algorithms & Data Structures (ITCS8114)\\
+
+- **B.S. Teaching Fellow**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2016---May 2018 </span>\\
+  Co-instructed, graded and tutored undergraduate students in the following programming classes\\
+  \-Object-oriented programming (CS311)\\
+  \-Data structures (CS300)\\
+  \-Introductory C++ programming (CS211)\\
+
 # Education
 - **University of North Carolina at Charlotte (PhD)**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  2018--- </span>\\
@@ -74,20 +88,6 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  2014---2018 </span>\\
   Computer Science, minor in Mathematics\\
   Cumulative GPA: 3.45
-
-# Teaching Experience
-- **Teaching Assistant**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021---May 2022 </span>\\
-  Taught and mentored graduate students in the following courses\\
-  \-Machine Learning (ITCS8156)\\
-  \-Algorithms & Data Structures (ITCS8114)\\
-
-- **B.S. Teaching Fellow**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2016---May 2018 </span>\\
-  Co-instructed, graded and tutored undergraduate students in the following programming classes\\
-  \-Object-oriented programming (CS311)\\
-  \-Data structures (CS300)\\
-  \-Introductory C++ programming (CS211)\\
 
 # Activities/Awards
 - **Dean’s Honor Roll**\\
