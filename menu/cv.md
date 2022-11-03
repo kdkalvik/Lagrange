@@ -8,12 +8,16 @@ permalink: /cv
 <center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text" aria-hidden="true"></i></span></a></b></center>
 
 # Research Interests
-I am interested in Bayesian learning and mathematical optimization. Specifically, methods that can reliably express prediction uncertainty, make open-set predictions, and incorporate prior domain knowledge. I am currently researching sparse Gaussian processes to address sensor placement and source localization problems. 
+I am interested in Bayesian learning and mathematical optimization. Specifically, methods that can reliably express uncertainty, make open-set predictions, and incorporate prior domain knowledge.
 
 # Research Experience
-- **Methane Leak Rate Estimation July**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2020---Sep 2021 </span>\\
-  Researching Bayesian approaches for estimating methane gas leak rates from oil wells. I Improved the computation time of leak rate estimation and informative path planning by five orders of magnitude and at least one order of magnitude, respectively
+- **Efficient Sensor Placement using Sparse Gaussian Processes**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i> Jan 2022--- </span>\\
+  Researching sensor placement and source localization using sparse Gaussian processes 
+
+- **Methane Leak Rate Estimation**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i> July 2020---Dec 2021 </span>\\
+  Researched Bayesian approaches for estimating methane gas leak rates from oil wells. I Improved the computation time of leak rate estimation and informative path planning by five orders of magnitude and at least one order of magnitude, respectively
 
 - **Sensor Placement for Multi-source Localization**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  July 2020---Sep 2021 </span>\\
@@ -51,6 +55,26 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  May 2015---Sep 2015 </span>\\
   Designed, built, and programmed a scaled-down aircraft wing capable of warping to improve fuel efficiency when used in fixed-wing aircrafts
 
+# Skills
+- **Platforms:** Windows, Linux, Unix, OpenStack, Amazon Web Services, Microsoft Azure, Google Cloud Platform, Slurm
+- **Programming Languages:** Python, C/C++, Matlab, SQL, Shell Scripting
+- **Libraries:** Tensorflow, PyTorch, PyCaffe, OpenCV, Robot Operating System, Open MPI, SciPy, Gazebo Simulator, DoWhy, CVXOPT, pgmpy
+
+# Education
+- **University of North Carolina at Charlotte (PhD)**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2018--- </span>\\
+  Computer Science, Machine Learning
+
+- **University of North Carolina at Charlotte (MSc)**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2018---2021 </span>\\
+  Computer Science, concentration in AI, Robotics, and Gaming\\
+  Cumulative GPA: 4.00
+
+- **Wichita State University (BSc)**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2014---2018 </span>\\
+  Computer Science, minor in Mathematics\\
+  Cumulative GPA: 3.45
+
 # Teaching Experience
 - **Teaching Assistant**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021--- </span>\\
@@ -75,23 +99,3 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
 - **Vice President, Institute of Electrical and Electronics Engineering**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2015---Dec 2016 </span>\\
   Managed the local chapter of IEEE and organized educational events on campus
-
-# Skills
-- **Platforms:** Windows, Linux, Unix, OpenStack, Amazon Web Services, Microsoft Azure, Google Cloud Platform, Slurm
-- **Programming Languages:** Python, C/C++, Matlab, SQL, Shell Scripting
-- **Libraries:** Tensorflow, PyTorch, PyCaffe, OpenCV, Robot Operating System, Open MPI, SciPy, Gazebo Simulator, DoWhy, CVXOPT, pgmpy
-
-# Education
-- **University of North Carolina at Charlotte (PhD)**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2018--- </span>\\
-  Computer Science, Machine Learning
-
-- **University of North Carolina at Charlotte (MSc)**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2018---2021 </span>\\
-  Computer Science, concentration in AI, Robotics, and Gaming\\
-  Cumulative GPA: 4.00
-
-- **Wichita State University (BSc)**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  2014---2018 </span>\\
-  Computer Science, minor in Mathematics\\
-  Cumulative GPA: 3.45
