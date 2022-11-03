@@ -56,9 +56,9 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
   Designed, built, and programmed a scaled-down aircraft wing capable of warping to improve fuel efficiency when used in fixed-wing aircrafts
 
 # Skills
-- **Platforms:** Windows, Linux, Unix, OpenStack, Amazon Web Services, Microsoft Azure, Google Cloud Platform, Slurm
-- **Programming Languages:** Python, C/C++, Matlab, SQL, Shell Scripting
-- **Libraries:** Tensorflow, PyTorch, PyCaffe, OpenCV, Robot Operating System, Open MPI, SciPy, Gazebo Simulator, DoWhy, CVXOPT, pgmpy
+- **Platforms:** Linux, Unix, OpenStack, Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), Slurm
+- **Programming Languages:** Python, C/C++, Matlab, Bash Scripting, SQL
+- **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), SciPy, Pandas, Pyro, GPFlow, Numpy
 
 # Education
 - **University of North Carolina at Charlotte (PhD)**\\
@@ -78,13 +78,13 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
 # Teaching Experience
 - **Teaching Assistant**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021---May 2022 </span>\\
-  \ Taught and mentored graduate students in the following courses\\
+  Taught and mentored graduate students in the following courses\\
   \-Machine Learning (ITCS8156)\\
   \-Algorithms & Data Structures (ITCS8114)\\
 
 - **B.S. Teaching Fellow**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2016---May 2018 </span>\\
-  \ Co-instructed, graded and tutored undergraduate students in the following programming classes\\
+  Co-instructed, graded and tutored undergraduate students in the following programming classes\\
   \-Object-oriented programming (CS311)\\
   \-Data structures (CS300)\\
   \-Introductory C++ programming (CS211)\\
