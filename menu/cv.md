@@ -13,7 +13,7 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
 # Research Experience
 - **Efficient Sensor Placement using Sparse Gaussian Processes**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> Jan 2022--- </span>\\
-  Researching sensor placement and source localization using sparse Gaussian processes 
+  Researching sparse Gaussian processes for efficient sensor placement in environmental monitoring applications
 
 - **Methane Leak Rate Estimation**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> July 2020---Dec 2021 </span>\\
@@ -77,15 +77,17 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
 
 # Teaching Experience
 - **Teaching Assistant**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021--- </span>\\
-  \-Teaching assistant for graduate level Machine Learning course (ITCS8156)\\
-  \-Teaching assistant for graduate level Algorithms Data Structures course (ITCS8114)
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021---May 2022 </span>\\
+  \ Taught and mentored graduate students in the following courses\\
+  \-Machine Learning (ITCS8156)\\
+  \-Algorithms & Data Structures (ITCS8114)\\
 
 - **B.S. Teaching Fellow**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2016---May 2018 </span>\\
-  \-Teaching assistant for undergraduate Object-oriented Programming course (CS311)\\
-  \-Teaching assistant for undergraduate Data structures course (CS300)\\
-  \-Teaching assistant for undergraduate Introductory C++ programming course (CS211)
+  \ Co-instructed, graded and tutored undergraduate students in the following programming classes\\
+  \-Object-oriented programming (CS311)\\
+  \-Data structures (CS300)\\
+  \-Introductory C++ programming (CS211)\\
 
 # Activities/Awards
 - **Dean’s Honor Roll**\\
