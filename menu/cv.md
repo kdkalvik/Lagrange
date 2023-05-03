@@ -4,7 +4,7 @@ title:
 permalink: /cv
 ---
 
-<center><a href="url"><img src="{{ site.github.url }}/assets/img/Kalvik.jpg" height="auto" width="200" style="border-radius:50%"></a></center>
+<center><img src="{{ site.github.url }}/assets/img/Kalvik.jpg" height="auto" width="200" style="border-radius:50%"></center>
 <center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text" aria-hidden="true"></i></span></a></b></center>
 
 # Research Interests
