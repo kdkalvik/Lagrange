@@ -47,6 +47,7 @@ abstract: "A list of lectures on various important topics"
         <td bgcolor="#FFFFFF" style="line-height:20px;" colspan=3>&nbsp;</td>          	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLd3hlSJsX_Imk_BPmB_H3AQjFKZS9XgZm	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Computer Vision	</td></tr>	
         <tr class="data_row"><td><a href="	https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-034-artificial-intelligence-fall-2010/lecture-videos/	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Artificial Intelligence	</td></tr>	
+        <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Machine Learning Theory	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Machine Learning	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Reinforcement Learning	</td></tr>	
         <tr class="data_row"><td><a href="	https://youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv	"><i class="fa fa-external-link" aria-hidden="true"></i></a></td><td>	Convolutional Neural Networks for Visual Recognition	</td></tr>	
