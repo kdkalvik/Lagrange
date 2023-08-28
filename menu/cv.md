@@ -8,20 +8,20 @@ permalink: /cv
 <center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text" aria-hidden="true"></i></span></a></b></center>
 
 # Research Interests
-I am interested in Bayesian learning, deep learning, and algorithmic robotics. Specifically, I am studying sparse Gaussian processes to address crucial problems in robotics, such as generating explainable DNN predictions, sensor placement, multi-robot informative path planning, and learning robot dynamics. 
+I am interested in Bayesian learning, deep learning, and algorithmic robotics. Specifically, I am studying sparse Gaussian processes to address crucial problems in robotics, such as generating explainable DNN predictions, sensor placement, multi-robot informative path planning, and learning robot dynamics
 
 # Research Experience
 - **Efficient Multi-Robot Informative Path Planning using Sparse Gaussian Processes**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> Dec 2022--- </span>\\
-  Researching sparse Gaussian processes for efficient multi-robot informative path planning. Current results show that my method is an order of magnitude faster than the prior SOTA.
+  Researching sparse Gaussian processes for efficient multi-robot informative path planning. Current results show that my method is an order of magnitude faster than the prior SOTA
 
 - **Explaining, Justifying, and Quantifying Uncertainty of DNNs (GE Aerospace Internship)**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> May 2023---Aug 2023 </span>\\
-  Pioneered a SWaP-optimized Bayesian approach to explain black-box pre-trained DNN predictions. The method was capable of efficiently generating example-based explanations, justifications, and quantifying the prediction uncertainty of DNNs. 
+  Pioneered a SWaP-optimized Bayesian approach to explain black-box pre-trained DNN predictions. The method was capable of efficiently generating example-based explanations, justifications, and quantifying the prediction uncertainty of DNNs
 
 - **Efficient Sensor Placement using Sparse Gaussian Processes**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> Jan 2022---Dec 2022 </span>\\
-  Proved that sensor placement problems can be reduced to a regression problem that can be efficiently solved using sparse Gaussian processes.
+  Proved that sensor placement problems can be reduced to a regression problem that can be efficiently solved using sparse Gaussian processes
 
 - **Methane Leak Rate Estimation**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> July 2020---Dec 2021 </span>\\
