@@ -57,15 +57,16 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
 
 # Skills
 - **Platforms:** Linux, Unix, OpenStack, Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), Slurm
-- **Programming Languages:** Python, C/C++, Matlab, Bash Scripting, SQL
+- **Programming Languages:** Python, C/C++, Matlab, Bash Scripting
 - **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), SciPy, Pandas, Pyro, GPFlow, Numpy
 
 # Teaching Experience
 - **Teaching Assistant**\\
-  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021---May 2022 </span>\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2021--- </span>\\
   Taught and mentored graduate students in the following courses\\
   \-Machine Learning (ITCS8156)\\
-  \-Algorithms & Data Structures (ITCS8114)
+  \-Algorithms & Data Structures (ITCS8114)\\
+  \-Optimization for Machine Learning and Data Science (ITCS8010)
 
 - **B.S. Teaching Fellow**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2016---May 2018 </span>\\
@@ -90,6 +91,10 @@ I am interested in Bayesian learning and mathematical optimization. Specifically
   Cumulative GPA: 3.45
 
 # Activities/Awards
+- **Reviewer**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2022--- </span>\\
+  Reviewer for ICRA and IROS conferences
+  
 - **Dean’s Honor Roll**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  May 2018, May 2017, Dec 2016, Dec 2014 </span>\\
   Recognized for outstanding academic performance  by the Dean’s office
