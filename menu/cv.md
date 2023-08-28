@@ -102,7 +102,11 @@ I am interested in Bayesian learning, deep learning, and algorithmic robotics. S
 - **Reviewer**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Jan 2022--- </span>\\
   Reviewer for ICRA and IROS conferences
-  
+
+- **UNC Charlotte GSSF Grant Recipient**\\
+  <span><i class="fa fa-calendar" aria-hidden="true"></i>  May 2022 </span>\\
+  Awarded the UNC Charlotte Graduate School's Summer Fellowship (GSSF) grant
+    
 - **Dean’s Honor Roll**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  May 2018, May 2017, Dec 2016, Dec 2014 </span>\\
   Recognized for outstanding academic performance  by the Dean’s office
