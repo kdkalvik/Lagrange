@@ -4,7 +4,7 @@ title: "Efficient Sensor Placement from Regression with Sparse Gaussian Processe
 author: "Kalvik Jakkala"
 venue: Under Review
 year: 2023
-date: 2023-03-01 00:00:00
+date: 2023-08-20 00:00:00
 ---
 
 <p>
