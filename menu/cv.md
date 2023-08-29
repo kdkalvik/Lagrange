@@ -17,7 +17,7 @@ I am interested in Bayesian learning, deep learning, and algorithmic robotics. S
 
 - **Explaining, Justifying, and Quantifying Uncertainty of DNNs (GE Aerospace Internship)**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> May 2023---Aug 2023 </span>\\
-  Pioneered a SWaP-optimized Bayesian approach to explain black-box pre-trained DNN predictions. The method was capable of efficiently generating example-based explanations, justifications, and quantifying the prediction uncertainty of DNNs
+  Pioneered a low size, weight, and power (SWaP)-optimized Bayesian approach to explain black-box pre-trained DNN predictions. The method was capable of efficiently generating example-based explanations, justifications, and quantifying the prediction uncertainty of DNNs
 
 - **Efficient Sensor Placement using Sparse Gaussian Processes**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> Jan 2022---Dec 2022 </span>\\
@@ -64,9 +64,10 @@ I am interested in Bayesian learning, deep learning, and algorithmic robotics. S
   Designed, built, and programmed a scaled-down aircraft wing capable of warping to improve fuel efficiency when used in fixed-wing aircrafts
 
 # Skills
+- **Research Methods:** Gaussian Processes, State-Space Models, Probabilistic Models, Variational Inference, Convolutional Neural Networks (CNNs), Graph Neural Networks (GNNs), Generative Adversarial Networks (GANs), Transformers, Generative Flow Networks (GFlowNets-RL), Energy-Based Models, Flow-Based Models, Diffusion Models, Contrastive Representation Learning, Metric Learning
 - **Platforms:** Linux, Unix, OpenStack, Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), Slurm
 - **Programming Languages:** Python, C/C++, Matlab, Bash Scripting
-- **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), SciPy, Pandas, Pyro, GPFlow, Numpy
+- **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), Pyro, GPFlow, Numpy
 
 # Teaching Experience
 - **Teaching Assistant**\\
