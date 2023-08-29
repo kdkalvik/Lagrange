@@ -67,7 +67,7 @@ I am interested in Bayesian learning, deep learning, and algorithmic robotics. S
 - **Research Methods:** Gaussian Processes, State-Space Models, Probabilistic Models, Variational Inference, Convolutional Neural Networks (CNNs), Graph Neural Networks (GNNs), Generative Adversarial Networks (GANs), Transformers, Generative Flow Networks (GFlowNets-RL), Energy-Based Models, Flow-Based Models, Diffusion Models, Contrastive Representation Learning, Metric Learning
 - **Platforms:** Linux, Docker, OpenStack, Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP), Slurm
 - **Programming Languages:** Python, C/C++, Matlab, Bash Scripting
-- **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), Pyro, GPFlow, Numpy
+- **Libraries:** Tensorflow, PyTorch, OpenCV, Robot Operating System (ROS), Pyro, GPFlow, Numpy, Jax
 
 # Teaching Experience
 - **Teaching Assistant**\\
