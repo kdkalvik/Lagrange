@@ -12,8 +12,8 @@ menu:
 social:
 - {icon: 'github',     link: 'https://github.com/itskalvik'}
 - {icon: 'linkedin',   link: 'https://linkedin.com/in/kalvik'}
-- {icon: 'instagram',   link: 'https://www.instagram.com/itskalvik/'}
 - {icon: 'ai-google-scholar',   link: 'https://scholar.google.com/citations?user=oZ29YBkAAAAJ&hl=en'}
+- {icon: 'instagram',   link: 'https://www.instagram.com/itskalvik/'}
 - {icon: 'envelope',   link: 'mailto:kjakkala@uncc.edu'}
 
 # Customize site text
