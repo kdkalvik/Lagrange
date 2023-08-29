@@ -4,7 +4,7 @@ title: "Multi-Robot Informative Path Planning from Regression with Sparse Gaussi
 author: "Kalvik Jakkala"
 venue: Under Review
 year: 2023
-date: 2023-08-01 00:00:00
+date: 2023-08-29 00:00:00
 ---
 
 <p>
