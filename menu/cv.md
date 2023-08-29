@@ -13,7 +13,7 @@ I am interested in Bayesian learning, deep learning, and algorithmic robotics. S
 # Research Experience
 - **Efficient Multi-Robot Informative Path Planning using Sparse Gaussian Processes**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> Dec 2022--- </span>\\
-  Researching sparse Gaussian processes for efficient multi-robot informative path planning. Current results show that my method is an order of magnitude faster than the prior SOTA
+  Researching sparse Gaussian processes for efficient multi-robot informative path planning. Current results show that my method is an order of magnitude faster than the prior SOTA, thereby enabling real-time deployment on resource-constrained robots
 
 - **Explaining, Justifying, and Quantifying Uncertainty of DNNs (GE Aerospace Internship)**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i> May 2023---Aug 2023 </span>\\
