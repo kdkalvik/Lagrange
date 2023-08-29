@@ -79,7 +79,7 @@ I am interested in Bayesian learning, deep learning, and algorithmic robotics. S
 
 - **B.S. Teaching Fellow**\\
   <span><i class="fa fa-calendar" aria-hidden="true"></i>  Aug 2016---May 2018 </span>\\
-  Co-instructed, graded and tutored undergraduate students in the following programming classes\\
+  Co-instructed, graded, and tutored undergraduate students in the following programming classes\\
   \-Object-oriented programming (CS311)\\
   \-Data structures (CS300)\\
   \-Introductory C++ programming (CS211)
