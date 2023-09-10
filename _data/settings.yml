@@ -11,7 +11,7 @@ menu:
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
 social:
 - {icon: 'github',     link: 'https://github.com/itskalvik'}
-- {icon: 'linkedin',   link: 'www.linkedin.com/in/itskalvik'}
+- {icon: 'linkedin',   link: 'https://www.linkedin.com/in/itskalvik'}
 - {icon: 'ai-google-scholar',   link: 'https://scholar.google.com/citations?user=oZ29YBkAAAAJ&hl=en'}
 - {icon: 'instagram',   link: 'https://www.instagram.com/itskalvik/'}
 - {icon: 'envelope',   link: 'mailto:kjakkala@uncc.edu'}
