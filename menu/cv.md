@@ -8,7 +8,7 @@ permalink: /cv
 <center><b>PDF version: <a href="{{ site.github.url }}/assets/cv.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text" aria-hidden="true"></i></span></a></b></center>
 
 # Research Interests
-I am interested in Bayesian learning, deep learning, and algorithmic robotics. Specifically, I am studying sparse Gaussian processes to address crucial problems in robotics, such as generating explainable DNN predictions, sensor placement, multi-robot informative path planning, and learning robot dynamics
+I am interested in Bayesian learning, deep learning, and mathematical optimization. Currently, I am studying sparse Gaussian processes to address crucial problems in robotics, such as generating explainable DNN predictions, sensor placement, multi-robot informative path planning, and learning robot dynamics.
 
 # Research Experience
 - **Efficient Multi-Robot Informative Path Planning using Sparse Gaussian Processes**\\
