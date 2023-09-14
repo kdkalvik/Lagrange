@@ -19,7 +19,7 @@ date: 2023-08-29 00:00:00
 </p>
 
 <center>
-Paper: <a href="https://arxiv.org/pdf/2303.00028.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
+Paper: <a href="https://arxiv.org/pdf/2309.07050.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
 </center>
 
