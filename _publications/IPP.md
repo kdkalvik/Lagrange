@@ -9,7 +9,7 @@ date: 2023-08-29 00:00:00
 
 <p>
 <center>
-  <a href="https://webpages.uncc.edu/kjakkala"
+  <a href="https://itskalvik.github.io/cv.html"
    style="text-decoration: none"><b style="color:Black">Kalvik Jakkala</b></a>
    &nbsp;&nbsp;
   &nbsp;&nbsp;
@@ -19,8 +19,9 @@ date: 2023-08-29 00:00:00
 </p>
 
 <center>
-Appendix: <a href="https://nbviewer.org/github/itskalvik/itskalvik.github.io/blob/gh-pages/assets/SGP_IPP_APP.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
+Paper: <a href="https://arxiv.org/pdf/2309.07050.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 &nbsp;&nbsp;
+Appendix: <a href="https://nbviewer.org/github/itskalvik/itskalvik.github.io/blob/gh-pages/assets/SGP_IPP_APP.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 </center>
 
 ## Abstract
