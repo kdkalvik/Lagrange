@@ -9,7 +9,7 @@ date: 2023-08-20 00:00:00
 
 <p>
 <center>
-  <a href="https://webpages.uncc.edu/kjakkala"
+<a href="https://itskalvik.github.io/cv.html"
    style="text-decoration: none"><b style="color:Black">Kalvik Jakkala</b></a>
    &nbsp;&nbsp;
   &nbsp;&nbsp;
