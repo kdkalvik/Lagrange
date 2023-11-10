@@ -5,11 +5,11 @@ author: "Kalvik Jakkala"
 categories: journal
 tags: [documentation, sample]
 image: riemannian_manifold.png
-abstract: "Tutorial on the natural parametrization of the exponential-family distributions and how it leads to computationally efficient natural gradient descent in conjugate models."
+abstract: "Tutorial on the natural parameterization of the exponential-family distributions and how it leads to computationally efficient natural gradient descent in conjugate models."
 ---
 
-## Standard Parametrization
-The standard parametrization of the Gaussian distribution is given by the following:
+## Standard parameterization
+The standard parameterization of the Gaussian distribution is given by the following:
 
 $$
 p_\theta(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left\{ -\frac{(x-\mu)^2}{2\sigma^2})  \right\}
@@ -19,10 +19,10 @@ where $\mu$ is the mean and $\sigma^2$ is the variance. Hence, the set of all Ga
 
 $$\theta_1 = \mu\\ \theta_2 = \sigma$$
 
-This article will detail alternate parameterizations for the Gaussian distribution, and more broadly for the exponential-family distributions, to which the Gaussian distribution belongs. Specifically, we will look at the natural and expectation parameterizations, and examine their interrelation. Additionally, it will detail how to leverage the intrinsic structure of these parametrization spaces to attain computationally efficient gradients. These gradients, known as the natural gradients, are not only computationally efficient in conjutage exponential-family distributions, but also converge to the solution in fewer iterations.
+This article will detail alternate parameterizations for the Gaussian distribution, and more broadly for the exponential-family distributions, to which the Gaussian distribution belongs. Specifically, we will look at the natural and expectation parameterizations, and examine their interrelation. Additionally, it will detail how to leverage the intrinsic structure of these parameterization spaces to attain computationally efficient gradients. These gradients, known as the natural gradients, are not only computationally efficient in conjutage exponential-family distributions, but also converge to the solution in fewer iterations.
 
-## Moment/Expectation Parametrization
-The expectation parametrization of the exponential-family distributions is built using the potential functions, also known as the sufficient stastics:
+## Moment/Expectation parameterization
+The expectation parameterization of the exponential-family distributions is built using the potential functions, also known as the sufficient stastics:
 
 $$\phi_\alpha: X \to \mathbb{R}; \alpha \in \mathbb{I}$$
 
@@ -53,7 +53,7 @@ $$
 
 i.e., for any given $\eta$, there exists a distribution $p$ whose moments match the values of the parameter $\eta$.
 
-## Canonical/Exponential/Natural Parametrization
+## Canonical/Exponential/Natural parameterization
 The canonical form of the exponential-family distributions, is given by the following: 
 
 $$
@@ -74,7 +74,7 @@ $$
 \Omega := \{ \lambda \in \mathbb{R}^d | A(\lambda) < +\infty \}
 $$
 
-i.e., $\lambda$ values that give us a finite $A(\lambda)$. The natural parametrization $\lambda$ of a Gaussian distribution has the following mapping to the standard parametrization $\theta$: 
+i.e., $\lambda$ values that give us a finite $A(\lambda)$. The natural parameterization $\lambda$ of a Gaussian distribution has the following mapping to the standard parameterization $\theta$: 
 
 $$\lambda_1 = \frac{\mu}{\sigma^2}\\ \lambda_2 = -\frac{1}{2\sigma^2}$$
 
@@ -151,15 +151,15 @@ $$
 \end{aligned}
 $$
 
-The metric tensor $G$ is given by the Fisher Information Matrix, which can be computed for the natural parametrization as follows:
+The metric tensor $G$ is given by the Fisher Information Matrix, which can be computed for the natural parameterization as follows:
 
 $$
 G(\lambda) := \mathbb{E}_p[\nabla_\lambda \log p_\lambda (x) \nabla_\lambda \log p_\lambda (x)^\top]
 $$
 
-As such, by using the natural parametrization for the exponential-family distributions, we can leverage their Riemannian structure and compute their natural gradients, which results in faster convergence rate. 
+As such, by using the natural parameterization for the exponential-family distributions, we can leverage their Riemannian structure and compute their natural gradients, which results in faster convergence rate. 
 
-However, it is often computationally expensive to compute the metric tensor $G$ and invert it in most cases. This is where we further reap the benefits of using the natural parametrization for the exponential-family distributions. [Khan and Nielsen 2018](https://arxiv.org/abs/1807.04489) proved that for an exponential-family in the minimal representation, the natural gradient with respect to the natural parameters $\lambda$ is equal to the gradient with respect to the expectation parameters $\eta$, and vice versa:
+However, it is often computationally expensive to compute the metric tensor $G$ and invert it in most cases. This is where we further reap the benefits of using the natural parameterization for the exponential-family distributions. [Khan and Nielsen 2018](https://arxiv.org/abs/1807.04489) proved that for an exponential-family in the minimal representation, the natural gradient with respect to the natural parameters $\lambda$ is equal to the gradient with respect to the expectation parameters $\eta$, and vice versa:
 
 $$
 \begin{aligned}
@@ -168,17 +168,17 @@ $$
 \end{aligned}
 $$
 
-Here $\mathcal{L}_*(\eta)$ is the optimization function with the expectation parametrization. This relation is a consiquence of the mapping between the natural parameters $\lambda$ and the expectation parameters $\eta$ derived using the Legendre transformation. 
+Here $\mathcal{L}_*(\eta)$ is the optimization function with the expectation parameterization. This relation is a consiquence of the mapping between the natural parameters $\lambda$ and the expectation parameters $\eta$ derived using the Legendre transformation. 
 
-The advantage of this is that if we use the natural parametrization $\lambda$, for conjugate models, the natural gradient $\tilde{\nabla}_\lambda \mathcal{L}(\lambda)$ does not require explicit computation of the Fisher Information Matrix. Note that the opposite is not true, i.e., the natural gradient of $$\tilde{\nabla}_\eta \mathcal{L}_*(\eta)$$ requires the explicit computation of the Fisher Information Matrix.
+The advantage of this is that if we use the natural parameterization $\lambda$, for conjugate models, the natural gradient $\tilde{\nabla}_\lambda \mathcal{L}(\lambda)$ does not require explicit computation of the Fisher Information Matrix. Note that the opposite is not true, i.e., the natural gradient of $$\tilde{\nabla}_\eta \mathcal{L}_*(\eta)$$ requires the explicit computation of the Fisher Information Matrix.
 
-Indeed, the advantage of using using natural gardients with the natural parametrization $\lambda$ in conjugate models is clear in the context of variational inference:
+Indeed, the advantage of using using natural gardients with the natural parameterization $\lambda$ in conjugate models is clear in the context of variational inference:
 
 $$
 \tilde{\nabla}_\lambda \mathbb{E}_q \left[ \log \frac{p(x)}{q_\lambda(x)} \right] = [G(\lambda)]^{-1} \hat{\nabla}\mathbb{E}_q [\phi(x)^\top (\eta_0-\lambda) + A(\lambda)] = \eta_0 - \lambda
 $$
 
-As we can see, even though we used the natural gradients, the end result did not require use to explicitly compute the Fisher Information Matrix and invert it. Consequently, employing the natural parametrization for the Gaussian distribution, and more broadly for exponential-family distributions with conjugate models, yields faster convergence rates and computationally efficient natural gradient updates. Even in scenarios involving non-conjugate likelihoods, there are distinct advantages to utilizing natural parameters. For further insights into non-conjugate likelihoods, refer to the work by [Khan and Lin 2017](https://arxiv.org/abs/1703.04265).
+As we can see, even though we used the natural gradients, the end result did not require use to explicitly compute the Fisher Information Matrix and invert it. Consequently, employing the natural parameterization for the Gaussian distribution, and more broadly for exponential-family distributions with conjugate models, yields faster convergence rates and computationally efficient natural gradient updates. Even in scenarios involving non-conjugate likelihoods, there are distinct advantages to utilizing natural parameters. For further insights into non-conjugate likelihoods, refer to the work by [Khan and Lin 2017](https://arxiv.org/abs/1703.04265).
 
 # References
 
