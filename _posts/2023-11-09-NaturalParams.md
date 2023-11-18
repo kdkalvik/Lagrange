@@ -54,7 +54,7 @@ $$
 i.e., for any given $\eta$, there exists a distribution $p$ whose moments match the values of the parameter $\eta$.
 
 ## Canonical/Exponential/Natural parameterization
-The canonical form of the exponential-family distributions, is given by the following: 
+The canonical form of the Gaussian distribution (which belongs to the exponential-family of distributions), is given by the following: 
 
 $$
 p_\lambda(x) = \exp \left\{ \langle \lambda, \phi(x) \rangle - A(\lambda) \right\}
