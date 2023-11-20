@@ -12,7 +12,7 @@ abstract: "Tutorial on the natural parameterization of the exponential-family di
 The standard parameterization of the Gaussian distribution is given by the following:
 
 $$
-p_\theta(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left\{ -\frac{(x-\mu)^2}{2\sigma^2})  \right\}
+p_\theta(x) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp \left\{ -\frac{(x-\mu)^2}{2\sigma^2}  \right\}
 $$
 
 where $\mu$ is the mean and $\sigma^2$ is the variance. Hence, the set of all Gaussian distributions exist on a two-dimensional manifold, where the coordinates are given by the following: 
