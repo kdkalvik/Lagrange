@@ -166,12 +166,12 @@ Finally, Opper and Archambeau suggested defining the covariance parameters with 
 $$
 \begin{aligned}
 \frac{\partial\mathcal{F}}{\partial\mathbf{\lambda}} &= \frac{\partial\mathbf{\Sigma}}{\partial\mathbf{\lambda}} \frac{\partial\mathcal{F}}{\partial\mathcal{\mathbf{\Sigma}}} \\
-&= \left[ \frac{\partial}{\partial\mathbf{\lambda}} \left( \mathbf{K}^{-1} + \mathbf{\lambda} \right)^{-\top} \right] \frac{1}{2} \Biggl[ \underbrace{- \mathbf{\Sigma}^{-\top} + \mathbf{K}^{-1}}_{-\mathbf{\lambda}} \\
-& \quad \quad \quad \quad \quad \quad \quad \quad \quad + \underbrace{2 \sum_n \frac{\partial}{\partial\mathbf{\Sigma}} \langle -\ln \left[p(y_n|x_n) \right] \rangle_{q(x_n)}}_{\bar{\mathbf{\lambda}}} \Biggr] \\
-&= \frac{1}{2}\frac{\partial}{\partial\mathbf{\lambda}} \left( \mathbf{K}^{-1} + \mathbf{\lambda} \right)^{-\top}[-\mathbf{\lambda}+\bar{\mathbf{\lambda}}]\\
-&= \frac{1}{2}-\left( \mathbf{K}^{-1} + \mathbf{\lambda} \right)^{-\top} \frac{\partial \left( \mathbf{K}^{-1} + \mathbf{\lambda} \right)}{\partial\mathbf{\lambda}} \left( \mathbf{K}^{-1} + \mathbf{\lambda} \right)^{-\top} [-\mathbf{\lambda}+\bar{\mathbf{\lambda}}] \\
-&= \frac{1}{2}[\mathbf{\Sigma} \mathbf{I} \mathbf{\Sigma}] [\mathbf{\lambda}-\bar{\mathbf{\lambda}}]\\
-&= \frac{1}{2}[\mathbf{\Sigma} \circ \mathbf{\Sigma}] [\mathbf{\lambda}-\bar{\mathbf{\lambda}}]\\
+&= \left[ \frac{\partial}{\partial\mathbf{\lambda}} \left( \mathbf{K}^{-1} + \mathbf{\Lambda} \right)^{-\top} \right] \frac{1}{2} \Biggl[ \underbrace{- \mathbf{\Sigma}^{-\top} + \mathbf{K}^{-1}}_{-\mathbf{\Lambda}} \\
+& \quad \quad \quad \quad \quad \quad \quad \quad \quad + \underbrace{2 \sum_n \frac{\partial}{\partial\mathbf{\Sigma}} \langle -\ln \left[p(y_n|x_n) \right] \rangle_{q(x_n)}}_{\bar{\mathbf{\Lambda}}} \Biggr] \\
+&= \frac{1}{2}\frac{\partial}{\partial\mathbf{\lambda}} \left( \mathbf{K}^{-1} + \mathbf{\Lambda} \right)^{-\top}[-\mathbf{\Lambda}+\bar{\mathbf{\Lambda}}]\\
+&= \frac{1}{2}-\left( \mathbf{K}^{-1} + \mathbf{\Lambda} \right)^{-\top} \frac{\partial \left( \mathbf{K}^{-1} + \mathbf{\Lambda} \right)}{\partial\mathbf{\lambda}} \left( \mathbf{K}^{-1} + \mathbf{\Lambda} \right)^{-\top} [-\mathbf{\Lambda}+\bar{\mathbf{\Lambda}}] \\
+&= \frac{1}{2}[\mathbf{\Sigma} \mathbf{I} \mathbf{\Sigma}] [\mathbf{\Lambda}-\bar{\mathbf{\Lambda}}]\\
+&= \frac{1}{2}[\mathbf{\Sigma} \circ \mathbf{\Sigma}] [\mathbf{\Lambda}-\bar{\mathbf{\Lambda}}]\\
 &= \frac{1}{2}[\mathbf{\Sigma} \circ \mathbf{\Sigma}] [\mathbf{\lambda}-\bar{\mathbf{\lambda}}]\\
 \end{aligned}
 $$
