@@ -3,7 +3,7 @@ layout: post
 title: "How to read an academic paper"
 author: "Kalvik Jakkala"
 categories: journal
-tags: [documentation,sample]
+tags: [mind mapping, research]
 abstract: "A diagram/flow chart showing my process for reading an academic paper."
 ---
 

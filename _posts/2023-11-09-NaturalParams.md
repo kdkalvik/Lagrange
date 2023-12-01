@@ -3,7 +3,7 @@ layout: post
 title: "What is so natural about the seemingly unnatural \"natural parameters\"?"
 author: "Kalvik Jakkala"
 categories: journal
-tags: [documentation, sample]
+tags: [machine learning, Bayesian learning]
 image: riemannian_manifold.png
 abstract: "Tutorial on the natural parameterization of the exponential-family distributions and how it leads to computationally efficient natural gradient descent in conjugate models."
 ---

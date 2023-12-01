@@ -3,7 +3,7 @@ layout: post
 title: "Variational Gaussian approximation with only $O(N)$ free parameters"
 author: "Kalvik Jakkala"
 categories: journal
-tags: [documentation, sample]
+tags: [machine learning, Bayesian learning]
 image: variational-inference.png
 abstract: "Tutorial on variational Gaussian approximation and why using Gaussian priors and factorizing likelihoods leads to only $O(N)$ instead of $O(N^2)$ variational parameters, $N$ being the number of random variables."
 ---

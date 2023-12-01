@@ -3,7 +3,7 @@ layout: post
 title: "Learning resources for AI researchers"
 author: "Kalvik Jakkala"
 categories: journal
-tags: [documentation,sample]
+tags: [mind mapping, robotics, machine learning]
 abstract: "A list of lectures on various important topics"
 ---
 
