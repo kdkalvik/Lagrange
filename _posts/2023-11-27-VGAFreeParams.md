@@ -41,7 +41,7 @@ $$
 \end{aligned}
 $$
 
-In the last equation above, $\ln p(\mathbf{y})$ is independent of $q(\mathbf{x})$. Therefore, we drop it to get the variational free energy $\mathcal{F}$ used to optimize the variational distribution:
+In the last equation above, $\ln p(\mathbf{y})$ is usually computationally intractable. Since we cannot compute the above KL, we instead optimize the variational free energy $\mathcal{F}$, which is equivalent to the above KL up to an added constant:
 
 $$
 \begin{aligned}
