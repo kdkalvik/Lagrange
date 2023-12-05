@@ -168,7 +168,7 @@ $$
 \end{aligned}
 $$
 
-Here $\mathcal{L}_*(\eta)$ is the optimization function with the expectation parameterization. This relation is a consiquence of the mapping between the natural parameters $\lambda$ and the expectation parameters $\eta$ derived using the Legendre transformation. 
+Here $\mathcal{L}_*(\eta)$ is the optimization function with the expectation parameterization. This relation is a consequence of the mapping between the natural parameters $\lambda$ and the expectation parameters $\eta$ derived using the Legendre transformation. 
 
 The advantage of this is that if we use the natural parameterization $\lambda$, for conjugate models, the natural gradient $\tilde{\nabla}_\lambda \mathcal{L}(\lambda)$ does not require explicit computation of the Fisher Information Matrix. Note that the opposite is not true, i.e., the natural gradient of $$\tilde{\nabla}_\eta \mathcal{L}_*(\eta)$$ requires the explicit computation of the Fisher Information Matrix.
 
