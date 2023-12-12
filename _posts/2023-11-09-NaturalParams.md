@@ -19,10 +19,10 @@ where $\mu$ is the mean and $\sigma^2$ is the variance. Hence, the set of all Ga
 
 $$\theta_1 = \mu\\ \theta_2 = \sigma$$
 
-This article will detail alternate parameterizations for the Gaussian distribution, and more broadly for the exponential-family distributions, to which the Gaussian distribution belongs. Specifically, we will look at the natural and expectation parameterizations, and examine their interrelation. Additionally, it will detail how to leverage the intrinsic structure of these parameterization spaces to attain computationally efficient gradients. These gradients, known as the natural gradients, are not only computationally efficient in conjutage exponential-family distributions, but also converge to the solution in fewer iterations.
+This article will detail alternate parameterization for the Gaussian distribution, and more broadly for the exponential-family distributions, to which the Gaussian distribution belongs. Specifically, we will look at the natural and expectation parameterization, and examine their interrelation. Additionally, it will detail how to leverage the intrinsic structure of these parameterization spaces to attain computationally efficient gradients. These gradients, known as the natural gradients, are not only computationally efficient in conjugate exponential-family distributions, but also converge to the solution in fewer iterations.
 
 ## Moment/Expectation parameterization
-The expectation parameterization of the exponential-family distributions is built using the potential functions, also known as the sufficient stastics:
+The expectation parameterization of the exponential-family distributions is built using the potential functions, also known as the sufficient statistics:
 
 $$\phi_\alpha: X \to \mathbb{R}; \alpha \in \mathbb{I}$$
 
@@ -81,7 +81,7 @@ $$\lambda_1 = \frac{\mu}{\sigma^2}\\ \lambda_2 = -\frac{1}{2\sigma^2}$$
 ## It's all about that A!
 The key reason we use the expectation and natural parameterizations has to do with how they are related to each other, which happens through the log partition function $A(\lambda)$.
 
-Indeed, when the exponential-family of distributions is represented with the miminal representation, which happens when the sufficient statistics $\phi_\alpha(x)$ are linearly independent, then there is a one-to-one mapping between the expectation parameters $\eta$ and the natural parameters $\lambda$. Note that a Gaussian distribution is fully specified by its first two moments.
+Indeed, when the exponential-family of distributions is represented with the minimal representation, which happens when the sufficient statistics $\phi_\alpha(x)$ are linearly independent, then there is a one-to-one mapping between the expectation parameters $\eta$ and the natural parameters $\lambda$. Note that a Gaussian distribution is fully specified by its first two moments.
 
 We get the mapping between the parameterizations by applying the Legendre transformation to the log partition function $A(\lambda)$ to get its dual $A^*(\eta)$:
 
@@ -120,7 +120,7 @@ $$
 
 ## Natural Gradients
 
-Knowing that the natural paramters $\lambda$ and expectation paramters $\eta$ are in a Riemannian manifold has significant ramifications for gradient-based optimization methods, such as stochastic-gradient descent (SGD) which is formulated as follows for maximizing a function $\mathcal{L}$: 
+Knowing that the natural parameters $\lambda$ and expectation parameters $\eta$ are in a Riemannian manifold has significant ramifications for gradient-based optimization methods, such as stochastic-gradient descent (SGD) which is formulated as follows for maximizing a function $\mathcal{L}$: 
 
 $$
 \lambda_{t+1} = \lambda_{t} + \rho_t [\hat{\nabla}_\lambda \mathcal{L}(\lambda_t)]
@@ -136,7 +136,7 @@ $$
 
 The above shows that SGD moves in the direction of the gradient while remaining close, in terms of the Euclidean distance, to the previous $\lambda_t$. However, since the natural parameters $\lambda$ are in a Riemannian manifold instead of a Euclidean manifold, the naive SGD formulation would be suboptimal. 
 
-Indeed, [Amari 1998](https://direct.mit.edu/neco/article-abstract/10/2/251/6143/Natural-Gradient-Works-Efficiently-in-Learning?redirectedFrom=fulltext) proved that the steepest direction in Riemannian manifolds is not given by the ordinary gradients, instead it is given by the $\textit{natual gradients}$, which utilize the metric tensor $G$ of the Riemannian manifold to scale the gradients as follows:
+Indeed, [Amari 1998](https://direct.mit.edu/neco/article-abstract/10/2/251/6143/Natural-Gradient-Works-Efficiently-in-Learning?redirectedFrom=fulltext) proved that the steepest direction in Riemannian manifolds is not given by the ordinary gradients, instead it is given by the $\textit{natural gradients}$, which utilize the metric tensor $G$ of the Riemannian manifold to scale the gradients as follows:
 
 $$
 \tilde{\nabla}_\lambda \mathcal{L}(\lambda) = G^{-1}[\hat{\nabla}_\lambda \mathcal{L}(\lambda)]
@@ -172,7 +172,7 @@ Here $\mathcal{L}_*(\eta)$ is the optimization function with the expectation par
 
 The advantage of this is that if we use the natural parameterization $\lambda$, for conjugate models, the natural gradient $\tilde{\nabla}_\lambda \mathcal{L}(\lambda)$ does not require explicit computation of the Fisher Information Matrix. Note that the opposite is not true, i.e., the natural gradient of $$\tilde{\nabla}_\eta \mathcal{L}_*(\eta)$$ requires the explicit computation of the Fisher Information Matrix.
 
-Indeed, the advantage of using using natural gardients with the natural parameterization $\lambda$ in conjugate models is clear in the context of variational inference:
+Indeed, the advantage of using using natural gradients with the natural parameterization $\lambda$ in conjugate models is clear in the context of variational inference:
 
 $$
 \tilde{\nabla}_\lambda \mathbb{E}_q \left[ \log \frac{p(x)}{q_\lambda(x)} \right] = [G(\lambda)]^{-1} \hat{\nabla}\mathbb{E}_q [\phi(x)^\top (\eta_0-\lambda) + A(\lambda)] = \eta_0 - \lambda
@@ -185,7 +185,7 @@ As we can see, even though we used the natural gradients, the end result did not
 This article was based on what I learned from the following sources:
 
 * [Amari's book—Information Geometry and Its Applications](https://link.springer.com/book/10.1007/978-4-431-55978-8)
-* [Amari's paper on natrual gradients](https://direct.mit.edu/neco/article-abstract/10/2/251/6143/Natural-Gradient-Works-Efficiently-in-Learning?redirectedFrom=fulltext)
+* [Amari's paper on natural gradients](https://direct.mit.edu/neco/article-abstract/10/2/251/6143/Natural-Gradient-Works-Efficiently-in-Learning?redirectedFrom=fulltext)
 * [Khan and Lin's paper on Conjugate-computation Variational Inference (CVI)](https://arxiv.org/abs/1703.04265)
 * [Khan and Nielsen's paper on natural gradient descent](https://arxiv.org/abs/1807.04489)
 * [Wainwright and Jordan's book—Graphical Models, Exponential Families, and
