@@ -184,6 +184,8 @@ In short, we resort to approximate inference methods when computing the original
 
 Finally, it's worth noting that Opper and Archambeau considered a full approximation, i.e., they used an $N$-dimensional variational Gaussian distribution to approximate the true posterior distribution of $N$ random variables. However, if we are interested in a [sparse approximation](https://itskalvik.github.io/VFE), considering only an $M$-dimensional variational Gaussian distribution where $M\ll N$, then we will have to optimize the full covariance matrix of the variational distribution. Although in such cases, the difference between $\mathcal{O}(M^2)$ and $\mathcal{O}(N)$ will be significant enough that the full covariance matrix of the sparse approximation would still have fewer variational parameters than a full approximation with a diagonal covariance matrix.
 
+---
+
 ## Relevant Identities 
 
 * $\mathbb{E}[\mathbf{x}\mathbf{x}^\top] = \mathbb{E}[\mathbf{x}]\mathbb{E}[\mathbf{x}]^\top + \text{cov}[\mathbf{x}]$

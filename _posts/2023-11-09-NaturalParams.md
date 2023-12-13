@@ -180,6 +180,8 @@ $$
 
 As we can see, even though we used the natural gradients, the end result did not require use to explicitly compute the Fisher Information Matrix and invert it. Consequently, employing the natural parameterization for the Gaussian distribution, and more broadly for exponential-family distributions with conjugate models, yields faster convergence rates and computationally efficient natural gradient updates. Even in scenarios involving non-conjugate likelihoods, there are distinct advantages to utilizing natural parameters. For further insights into non-conjugate likelihoods, refer to the work by [Khan and Lin 2017](https://arxiv.org/abs/1703.04265).
 
+---
+
 # References
 
 This article was based on what I learned from the following sources:
