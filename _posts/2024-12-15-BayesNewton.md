@@ -116,8 +116,43 @@ $$
 
 Posterior:
 
+$$
+\require{cancel}
+\begin{aligned}
+\lambda^{(1)}_{k+1} :=& \mathbf{C}^{-1}_{k+1} \mathbf{m}_{k+1} \\
+=& \mathbf{C}^{-1}_{k+1}[\mathbf{m}_{k} + \rho \mathbf{C}_{k+1} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k)] \\
+=& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \mathbf{C}^{-1}_{k+1}\mathbf{C}_{k+1} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \\
+=& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& [(1-\rho) \mathbf{C}_{k}^{-1} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k)]\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k)\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \left[\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1}\right] \mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} + \cancel{\rho \mathbf{K}^{-1} \mathbf{m}_{k}} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \cancel{\rho\mathbf{K}^{-1}\mathbf{\mathbf{m}_{k}}}+\rho\mathbf{K}^{-1}\mu \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k}  +\rho\mathbf{K}^{-1}\mu - \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\
+=& (1-\rho) \bar{\lambda}^{(1)}_{k}  + \rho \lambda^{(1)}_\text{prior} + \rho \left[ \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right] \\
+\end{aligned}
+$$
+
+$$
+\require{cancel}
+\begin{aligned}
+\lambda^{(2)}_{k+1} :=& -\frac{1}{2}\mathbf{C}^{-1}_{k+1} \\
+=& -\frac{1}{2} \left[ (1-\rho) \mathbf{C}_{k}^{-1} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \right] \\
+=& -\frac{1}{2} (1-\rho) \mathbf{C}_{k}^{-1} +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
+=& -\frac{1}{2} (1-\rho) \left[ \bar{\mathbf{C}}_{k}^{-1} + \mathbf{K}^{-1}  \right] +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
+=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} \mathbf{K}^{-1}  (1-\rho) + \frac{1}{2} \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \frac{1}{2} \rho\mathbf{K}^{-1}\\ 
+=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} (1-\rho) \mathbf{K}^{-1} - \frac{1}{2} \rho\mathbf{K}^{-1} + \frac{1}{2} \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
+=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} \mathbf{K}^{-1} + \frac{1}{2} \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
+=& (1-\rho) \bar{\lambda}^{(2)}_{k} + \lambda^{(2)}_\text{prior}  + \rho \frac{1}{2}\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
+\end{aligned}
+$$
 
 ---
+
+$$
+\begin{aligned}
+\end{aligned}
+$$
+
 
 # References
 
