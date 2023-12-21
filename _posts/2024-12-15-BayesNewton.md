@@ -10,10 +10,10 @@ abstract: "Tutorial on Bayes-Newton Methods for Approximate Bayesian Inference w
 ## Outline
 
 * [ ] Problem
-* [ ] Formulation
+* [x] Formulation
 * [ ] BLR
 * [ ] Bonnet and Price's Theorem
-* [ ] Newton's Method & Laplace Approx.
+* [x] Newton's Method & Laplace Approx.
 * [ ] Bayes-Newton (VI)
 * [ ] Limitations
 * [ ] Bayes-Gauss-Newton (VI)
@@ -44,7 +44,7 @@ $$
 \end{aligned}
 $$
 
-In the multivariate scenario $\frac{1}{f''(\mathbf{x}_n)} = H(f(\mathbf{x}_n))^{-1}$, i.e., it is the inverse of the hessian. Unlike first order methods such as gradient descent, Newton's method uses a local quadratic approximation to find the descent direction. 
+In the multivariate scenario $\frac{1}{f''(\mathbf{x}_n)} = \mathbf{H}(f(\mathbf{x}_n))^{-1}$, i.e., it is the inverse of the hessian. Unlike first order methods such as gradient descent, Newton's method uses a local quadratic approximation to find the descent direction. 
 
 ## Laplace's approximation
 
@@ -54,7 +54,7 @@ $$
 \begin{aligned}
 p(\mathbf{y|x}) &\approx q(\theta) \\
 &= \mathcal{N}(\mu=\hat{\theta}, \Sigma = S) \\
-\text{where, } \hat{\theta} &= arg\,max_\theta \log p(\mathbf{y|x; \theta}) \\
+\text{where, } \hat{\theta} &= \text{arg} \max_\theta \log p(\mathbf{y|x; \theta}) \\
 S^{-1} &= - \nabla^2_\theta \log p(\mathbf{y|x; \theta})|_{\theta=\hat{\theta}}
 \end{aligned}
 $$
@@ -119,7 +119,16 @@ Posterior:
 $$
 \require{cancel}
 \begin{aligned}
-\lambda^{(1)}_{k+1} :=& \mathbf{C}^{-1}_{k+1} \mathbf{m}_{k+1} \\
+\lambda^{(1)}_{k+1} :=& \mathbf{C}^{-1}_{k+1} \mathbf{m}_{k+1}  \hspace{200cm} \\
+\end{aligned}
+$$
+
+<details markdown=1>
+  <summary>Click to see the full derivation</summary>
+
+$$
+\require{cancel}
+\begin{aligned}
 =& \mathbf{C}^{-1}_{k+1}[\mathbf{m}_{k} + \rho \mathbf{C}_{k+1} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k)] \\
 =& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \mathbf{C}^{-1}_{k+1}\mathbf{C}_{k+1} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \\
 =& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
@@ -131,11 +140,27 @@ $$
 =& (1-\rho) \bar{\lambda}^{(1)}_{k}  + \rho \lambda^{(1)}_\text{prior} + \rho \left[ \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right] \\
 \end{aligned}
 $$
+</details>
 
 $$
 \require{cancel}
 \begin{aligned}
-\lambda^{(2)}_{k+1} :=& -\frac{1}{2}\mathbf{C}^{-1}_{k+1} \\
+=& \rho \lambda^{(1)}_\text{prior} + \underbrace{(1-\rho) \bar{\lambda}^{(1)}_{k} + \rho \left[ \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right]}_{\bar{\lambda}^{(1)}_{k+1}} \hspace{200cm} \\
+\end{aligned}
+$$
+
+$$
+\require{cancel}
+\begin{aligned}
+\lambda^{(2)}_{k+1} :=& -\frac{1}{2}\mathbf{C}^{-1}_{k+1} \hspace{200cm} \\
+\end{aligned}
+$$
+
+<details markdown=1>
+  <summary>Click to see the full derivation</summary>
+$$
+\require{cancel}
+\begin{aligned}
 =& -\frac{1}{2} \left[ (1-\rho) \mathbf{C}_{k}^{-1} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \right] \\
 =& -\frac{1}{2} (1-\rho) \mathbf{C}_{k}^{-1} +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
 =& -\frac{1}{2} (1-\rho) \left[ \bar{\mathbf{C}}_{k}^{-1} + \mathbf{K}^{-1}  \right] +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
@@ -145,6 +170,121 @@ $$
 =& (1-\rho) \bar{\lambda}^{(2)}_{k} + \lambda^{(2)}_\text{prior}  + \rho \frac{1}{2}\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
 \end{aligned}
 $$
+</details>
+
+$$
+\require{cancel}
+\begin{aligned}
+=& \lambda^{(2)}_\text{prior} + \underbrace{(1-\rho) \bar{\lambda}^{(2)}_{k} + \rho \frac{1}{2}\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}})}_{\bar{\lambda}^{(2)}_{k+1}}  \hspace{200cm} \\ 
+\end{aligned}
+$$
+
+## Bayes-Newton (Variational Inference)
+
+Bayesian inference methods such as variational inference, power expectation propagation, and posterior linearisation can be view as Bayesian generalisations of Newton's method. 
+
+Variational inference with $q(\mathbf{f})$ parameterized by $\lambda$:
+
+$$
+q^*(\mathbf{f}) = \text{arg} \min_{q(\mathbf{f})} \text{KL}(q(\mathbf{f}) || p(\mathbf{f} | \mathbf{y})) 
+$$
+
+The variational free energy (VFE), i.e., the negative of the evidence lower bound (ELBO):
+
+$$
+\begin{aligned}
+\text{VFE}(q(\mathbf{f})) &= \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] - \mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \\
+\end{aligned}
+$$
+
+### Bayesian Learning Rule (BLR)
+
+We can efficiently optimize the variational distribution using the BLR. The BLR updates use natural-gradients $$\tilde{\nabla}_\lambda$$, which scale the vanilla gradients $\nabla_\lambda$ by the Fisher information matrix $\mathbf{F}$ for faster convergence:
+
+$$
+\begin{aligned}
+\lambda_{k+1} &= \lambda_{k} - \rho \tilde{\nabla}_\lambda \text{VFE}(q(\mathbf{f}))\rvert_{\lambda=\lambda_k} \\
+&=  \lambda_k - \rho \underbrace{[\mathbf{F}(\lambda_k)]^{-1} \nabla_\lambda}_\text{natural gradient $\tilde{\nabla}_\lambda$} \text{VFE}(q(\mathbf{f}))\rvert_{\lambda=\lambda_k} \\
+&=  \lambda_k - \rho \nabla_\eta \text{VFE}(q(\mathbf{f}))\rvert_{\eta=\eta_k}
+\end{aligned}
+$$
+
+However, the method leverages the properties of the natural parametrization $\lambda$ of the exponential-family distributions to avoid having to explicitly computing the Fisher information matrix $\mathbf{F}$ by computing the gradients with respect to the expectation parameters $\eta$. 
+
+We can derive ...:
+
+$$
+\begin{aligned}
+\lambda_{k+1} &= \lambda_k - \rho \nabla_\eta \text{VFE}(q(\mathbf{f})) \\
+&= \lambda_k - \rho \left( \nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] - \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \right)  \\
+&= \lambda_k - \rho \left( \lambda_k - \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \right)  \\
+&= (1-\rho) \lambda_k + \rho \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \\
+\end{aligned}
+$$
+
+Refer to my tutorial on the [foundations of BLR](http://127.0.0.1:4000/CVI#natural-param-derivative) for proof of $\nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] = \lambda_k$.
+
+<details markdown=1>
+  <summary>Alternate Parameterizations and their Derivatives (click to see the details)</summary>
+
+### Alternate Parameterizations and their Derivatives
+The exponential-family distributions such as the Gaussian distribution can be parametrized by the standard parameters $\theta$, i.e., the mean and covariance, and also the expectation parameters $\eta$ which can be related to the standard parameters $\theta$ as follows:
+
+$$
+\begin{alignat*}{3}
+\eta^{(1)} &= \mathbf{m} \quad & \eta^{(2)} &= \mathbf{C} + \mathbf{mm^\top} \\
+\implies \mathbf{m} &= \eta^{(1)} \quad \quad & \mathbf{C} &= \eta^{(2)} - \eta^{(1)} \left( \eta^{(1)} \right)^\top
+\end{alignat*}
+$$
+
+We can use the above to derive the following derivatives:
+
+$$
+\begin{aligned}
+\frac{d}{d\eta^{(1)}} f(\mathbf{m}, \mathbf{C}) &= \frac{df(\mathbf{m}, \mathbf{C})}{d\mathbf{m}} \frac{d\mathbf{m}}{d\eta^{(1)}} + \frac{d f(\mathbf{m}, \mathbf{C})}{d\mathbf{C}} \frac{d\mathbf{C}}{d\eta^{(1)}} \\
+&= \frac{df(\mathbf{m}, \mathbf{C})}{d\mathbf{m}} + \frac{d f(\mathbf{m}, \mathbf{C})}{d\mathbf{C}} (-2\eta^{(1)}) \\
+&= \frac{df(\mathbf{m}, \mathbf{C})}{d\mathbf{m}} -2 \frac{d f(\mathbf{m}, \mathbf{C})}{d\mathbf{C}} \mathbf{m} \\
+\implies \nabla_\eta^{(1)} f(\mathbf{m}, \mathbf{C}) &= \nabla_\mathbf{m} f(\mathbf{m}, \mathbf{C}) - 2 \nabla_\mathbf{C} f(\mathbf{m}, \mathbf{C}) \mathbf{m} \\
+\\
+\\
+\frac{d}{d\eta^{(2)}} f(\mathbf{m}, \mathbf{C}) &= \frac{df(\mathbf{m}, \mathbf{C})}{d\mathbf{m}} \frac{d\mathbf{m}}{d\eta^{(2)}} + \frac{d f(\mathbf{m}, \mathbf{C})}{d\mathbf{C}} \frac{d\mathbf{C}}{d\eta^{(2)}} \\
+&= 0 + \frac{d f(\mathbf{m}, \mathbf{C})}{d\mathbf{C}} \\
+\implies \nabla_\eta^{(2)} f(\mathbf{m}, \mathbf{C}) &= \nabla_\mathbf{C} f(\mathbf{m}, \mathbf{C}) \\
+\end{aligned}
+$$
+</details>
+
+<details markdown=1>
+  <summary>Bonnet's and Price's Theorems (click to see the details)</summary>
+
+We can compute the gradients with respect to the expectation parameters $\eta$.
+
+### Bonnet's and Price's Theorems
+
+Let $f(\mathbf{x})$ be an arbitrary function of $\mathbf{x}$. Suppose that the elements $x_n$ of $\mathbf{x}$ are stochastic variables with joint probability density function $p(\mathbf{x})$. Then, for the special case that $\mathbf{x} \sim \mathcal{N}(\mathbf{m}, \mathbf{C})$, i.e., the variables $\mathbf{x}$ have a Gaussian distribution, the theorems give us the following results:
+
+* [Mean formulation](https://link.springer.com/article/10.1007/BF02994793): 
+
+$$
+\begin{aligned}
+\frac{\partial}{\partial m_n} \int^\infty_{-\infty} p(\mathbf{x}) f(\mathbf{x}) d\mathbf{x} &= \int^\infty_{-\infty} p(\mathbf{x}) \left[ \frac{\partial}{\partial x_n} f(\mathbf{x}) \right] d\mathbf{x} \\
+\frac{\partial}{\partial m_n} \mathbb{E}_{p(\mathbf{x})}[f(\mathbf{x})] &= \mathbb{E}_{p(\mathbf{x})}\left[ \frac{\partial}{\partial x_n} f(\mathbf{x}) \right] \\
+\nabla_\mathbf{m} \mathbb{E}_{p(\mathbf{x})}[f(\mathbf{x})] &= \mathbb{E}_{p(\mathbf{x})}\left[ \nabla_\mathbf{x} f(\mathbf{x}) \right] \\
+\end{aligned}
+$$
+
+* [Covariance formulation](https://arxiv.org/pdf/1710.03576.pdf): 
+
+$$
+\begin{aligned}
+\frac{\partial}{\partial \mathbf{C}_{ij}} \int^\infty_{-\infty} p(\mathbf{x}) f(\mathbf{x}) d\mathbf{x} &= c_{ij} \int^\infty_{-\infty} p(\mathbf{x}) \left[ \frac{\partial^2}{\partial x_i \partial x_j} f(\mathbf{x}) \right] d\mathbf{x} \\
+\frac{\partial}{\partial \mathbf{C}_{ij}} \mathbb{E}_{p(\mathbf{x})}[f(\mathbf{x})] &= c_{ij} \mathbb{E}_{p(\mathbf{x})}\left[ \frac{\partial^2}{\partial x_i \partial x_j} f(\mathbf{x}) \right] \\
+\nabla_\mathbf{C} \mathbb{E}_{p(\mathbf{x})}[f(\mathbf{x})] &= \frac{1}{2} \mathbb{E}_{p(\mathbf{x})}\left[ \nabla^2_\mathbf{x} f(\mathbf{x}) \right] \\
+\end{aligned}
+$$
+
+where $c_{ij} = 1/2$ if $i=j$ and $c_{ij} = 1$ if $i \neq j$ (since $\mathbf{C}$ is symmetric).
+</details>
 
 ---
 
