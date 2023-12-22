@@ -9,56 +9,15 @@ abstract: "Tutorial on Bayes-Newton Methods for Approximate Bayesian Inference w
 
 ## Outline
 
-* [ ] Problem
-* [x] Formulation
-* [ ] BLR
-* [ ] Bonnet and Price's Theorem
-* [x] Newton's Method & Laplace Approx.
-* [ ] Bayes-Newton (VI)
+* [x] [Problem Formulation](http://127.0.0.1:4000/BayesNewton#Problem-Formulation)
+* [x] [Newton's Method & Laplace's Approx](http://127.0.0.1:4000/BayesNewton#Newton-Laplace)
+* [x] [Bayes-Newton (VI)](http://127.0.0.1:4000/BayesNewton#Bayes-Newton)
 * [ ] Limitations
-* [ ] Bayes-Gauss-Newton (VI)
-* [ ] Bayes-Quasi-Newton (VI)
-* [ ] PSD constraints via Riemannian Gradients (VI)
+* [ ] [Bayes-Gauss-Newton (VI)](http://127.0.0.1:4000/BayesNewton#Bayes-Gauss-Newton)
+* [ ] [Bayes-Quasi-Newton (VI)](http://127.0.0.1:4000/BayesNewton#Bayes-Quasi-Newton)
+* [ ] [PSD constraints via Riemannian Gradients (VI)](http://127.0.0.1:4000/Riemannian-Gradients)
 
-## Taylor Series
-
-If we know the value of $f(\mathbf{a})$ and it's derivatives  $f'(\mathbf{a}), f''(\mathbf{a}), f'''(\mathbf{a}), \cdots$, we can approximate the value of $f(\mathbf{x})$ as follows using the Taylor series:
-
-$$
-\begin{aligned}
-f(\mathbf{x}) &= \sum^\infty_{n=0} \frac{f^n(\mathbf{a})}{n!} (\mathbf{x-a})^n \\
-&= f(\mathbf{a}) + \frac{f'(\mathbf{a})}{1!} (\mathbf{x-a}) + \frac{f''(\mathbf{a})}{2!} (\mathbf{x-a})^2 + \frac{f'''(\mathbf{a})}{3!} (\mathbf{x-a})^3 + \cdots
-\end{aligned}
-$$
-
-## Newton's Method
-
-Newton's method leverages the Taylor series to find solutions, i.e., the stationary points of functions. We do this by considering the derivative of the second order Taylor series and equating it to zero:
-
-$$
-\begin{aligned}
-0 &= \frac{d}{d (\mathbf{x}_{n+1}-\mathbf{x}_n)} \left[f(\mathbf{x}_n) + f'(\mathbf{x}_n)(\mathbf{x}_{n+1}-\mathbf{x}_n) + \frac{1}{2} f''(\mathbf{x}_n) (\mathbf{x}_{n+1}-\mathbf{x}_n)^2 \right] \\
-0 &= 0 + f'(\mathbf{x}_n) + f''(\mathbf{x}_n)(\mathbf{x}_{n+1}-\mathbf{x}_n) \\
-&\mathbf{x}_{n+1}-\mathbf{x}_n = -\frac{f'(\mathbf{x}_n)}{f''(\mathbf{x}_n)} \\
-&\mathbf{x}_{n+1} = \mathbf{x}_n-\frac{f'(\mathbf{x}_n)}{f''(\mathbf{x}_n)}
-\end{aligned}
-$$
-
-In the multivariate scenario $\frac{1}{f''(\mathbf{x}_n)} = \mathbf{H}(f(\mathbf{x}_n))^{-1}$, i.e., it is the inverse of the hessian. Unlike first order methods such as gradient descent, Newton's method uses a local quadratic approximation to find the descent direction. 
-
-## Laplace's approximation
-
-The Laplace's approximation is used to approximate computationally intractitble posterior probability distributions $p(\mathbf{y\mid x})$ by fitting a Gaussian distribution $q(\theta)$ with the mean $\mu$ equal to the maximum a posteriori (MAP) solution $\hat{\theta}$ and precision (inverse of the covariance $\Sigma$) equal to the Fisher information matrix $S^{-1}$:
-
-$$
-\begin{aligned}
-p(\mathbf{y|x}) &\approx q(\theta) \\
-&= \mathcal{N}(\mu=\hat{\theta}, \Sigma = S) \\
-\text{where, } \hat{\theta} &= \text{arg} \max_\theta \log p(\mathbf{y|x; \theta}) \\
-S^{-1} &= - \nabla^2_\theta \log p(\mathbf{y|x; \theta})|_{\theta=\hat{\theta}}
-\end{aligned}
-$$
-
+<a id="Problem-Formulation"></a>
 ## Problem Formulation
 
 $$
@@ -85,13 +44,62 @@ $$
 \end{aligned}
 $$
 
+<a id="Newton-Laplace"></a>
 ## Newton's Method and Laplace's approximation for Bayesian Inference
+
+<details markdown=1>
+  <summary>Taylor Series, Newton's Method, and Laplace's Approximation (click for more details)</summary>
+
+---
+
+### Taylor Series
+
+If we know the value of $f(\mathbf{a})$ and it's derivatives  $f'(\mathbf{a}), f''(\mathbf{a}), f'''(\mathbf{a}), \cdots$, we can approximate the value of $f(\mathbf{x})$ as follows using the Taylor series:
 
 $$
 \begin{aligned}
-\mathcal{L}(\mathbf{f}) &= \log p(\mathbf{f|y}) =  \log p(\mathbf{y|f}) + \log p(\mathbf{f}) - \log p(\mathbf{y}) \text{,}\\
-\nabla_\mathbf{f} \mathcal{L}(\mathbf{f}) &= \nabla_\mathbf{f} \log p(\mathbf{y|f}) - \mathbf{K}^{-1}(\mathbf{f-\mu}) \text{,}\\
-\nabla^2_\mathbf{f} \mathcal{L}(\mathbf{f}) &= \nabla^2_\mathbf{f} \log p(\mathbf{y|f}) - \mathbf{K}^{-1} \text{.} \\
+f(\mathbf{x}) &= \sum^\infty_{n=0} \frac{f^n(\mathbf{a})}{n!} (\mathbf{x-a})^n \\
+&= f(\mathbf{a}) + \frac{f'(\mathbf{a})}{1!} (\mathbf{x-a}) + \frac{f''(\mathbf{a})}{2!} (\mathbf{x-a})^2 + \frac{f'''(\mathbf{a})}{3!} (\mathbf{x-a})^3 + \cdots
+\end{aligned}
+$$
+
+### Newton's Method
+
+Newton's method leverages the Taylor series to find solutions, i.e., the stationary points of functions. We do this by considering the derivative of the second order Taylor series and equating it to zero:
+
+$$
+\begin{aligned}
+0 &= \frac{d}{d (\mathbf{x}_{n+1}-\mathbf{x}_n)} \left[f(\mathbf{x}_n) + f'(\mathbf{x}_n)(\mathbf{x}_{n+1}-\mathbf{x}_n) + \frac{1}{2} f''(\mathbf{x}_n) (\mathbf{x}_{n+1}-\mathbf{x}_n)^2 \right] \\
+0 &= 0 + f'(\mathbf{x}_n) + f''(\mathbf{x}_n)(\mathbf{x}_{n+1}-\mathbf{x}_n) \\
+&\mathbf{x}_{n+1}-\mathbf{x}_n = -\frac{f'(\mathbf{x}_n)}{f''(\mathbf{x}_n)} \\
+&\mathbf{x}_{n+1} = \mathbf{x}_n-\frac{f'(\mathbf{x}_n)}{f''(\mathbf{x}_n)}
+\end{aligned}
+$$
+
+In the multivariate scenario $\frac{1}{f''(\mathbf{x}_n)} = \mathbf{H}(f(\mathbf{x}_n))^{-1}$, i.e., it is the inverse of the hessian. Unlike first order methods such as gradient descent, Newton's method uses a local quadratic approximation to find the descent direction. 
+
+### Laplace's approximation
+
+The Laplace's approximation is used to approximate computationally intractitble posterior probability distributions $p(\mathbf{y\mid x})$ by fitting a Gaussian distribution $q(\theta)$ with the mean $\mu$ equal to the maximum a posteriori (MAP) solution $\hat{\theta}$ and precision (inverse of the covariance $\Sigma$) equal to the Fisher information matrix $S^{-1}$:
+
+$$
+\begin{aligned}
+p(\mathbf{y|x}) &\approx q(\theta) \\
+&= \mathcal{N}(\mu=\hat{\theta}, \Sigma = S) \\
+\text{where, } \hat{\theta} &= \text{arg} \max_\theta \ln p(\mathbf{y|x; \theta}) \\
+S^{-1} &= - \nabla^2_\theta \ln p(\mathbf{y|x; \theta})|_{\theta=\hat{\theta}}
+\end{aligned}
+$$
+
+---
+
+</details>
+
+$$
+\begin{aligned}
+\mathcal{L}(\mathbf{f}) &= \ln p(\mathbf{f|y}) =  \ln p(\mathbf{y|f}) + \ln p(\mathbf{f}) - \ln p(\mathbf{y}) \text{,}\\
+\nabla_\mathbf{f} \mathcal{L}(\mathbf{f}) &= \nabla_\mathbf{f} \ln p(\mathbf{y|f}) - \mathbf{K}^{-1}(\mathbf{f-\mu}) \text{,}\\
+\nabla^2_\mathbf{f} \mathcal{L}(\mathbf{f}) &= \nabla^2_\mathbf{f} \ln p(\mathbf{y|f}) - \mathbf{K}^{-1} \text{.} \\
 \end{aligned}
 $$
 
@@ -130,14 +138,14 @@ $$
 \require{cancel}
 \begin{aligned}
 =& \mathbf{C}^{-1}_{k+1}[\mathbf{m}_{k} + \rho \mathbf{C}_{k+1} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k)] \\
-=& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \mathbf{C}^{-1}_{k+1}\mathbf{C}_{k+1} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \\
-=& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
-=& [(1-\rho) \mathbf{C}_{k}^{-1} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k)]\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
-=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k)\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
-=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \left[\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1}\right] \mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
-=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} + \cancel{\rho \mathbf{K}^{-1} \mathbf{m}_{k}} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \cancel{\rho\mathbf{K}^{-1}\mathbf{\mathbf{m}_{k}}}+\rho\mathbf{K}^{-1}\mu \\
-=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k}  +\rho\mathbf{K}^{-1}\mu - \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} + \rho \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\
-=& (1-\rho) \bar{\lambda}^{(1)}_{k}  + \rho \lambda^{(1)}_\text{prior} + \rho \left[ \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right] \\
+=& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \cancel{\mathbf{C}^{-1}_{k+1}}\cancel{\mathbf{C}_{k+1}} \nabla_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \\
+=& \mathbf{C}^{-1}_{k+1}\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& [(1-\rho) \mathbf{C}_{k}^{-1} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k)]\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k)\mathbf{m}_{k} + \rho \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \left[\nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1}\right] \mathbf{m}_{k} + \rho \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \rho\mathbf{K}^{-1}(\mathbf{\mathbf{m}_{k}-\mu}) \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k} - \rho \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} + \cancel{\rho \mathbf{K}^{-1} \mathbf{m}_{k}} + \rho \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \cancel{\rho\mathbf{K}^{-1}\mathbf{\mathbf{m}_{k}}}+\rho\mathbf{K}^{-1}\mu \\
+=& (1-\rho) \mathbf{C}_{k}^{-1} \mathbf{m}_{k}  +\rho\mathbf{K}^{-1}\mu - \rho \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} + \rho \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \\
+=& (1-\rho) \bar{\lambda}^{(1)}_{k}  + \rho \lambda^{(1)}_\text{prior} + \rho \left[ \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right] \\
 \end{aligned}
 $$
 </details>
@@ -145,7 +153,7 @@ $$
 $$
 \require{cancel}
 \begin{aligned}
-=& \rho \lambda^{(1)}_\text{prior} + \underbrace{(1-\rho) \bar{\lambda}^{(1)}_{k} + \rho \left[ \nabla_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right]}_{\bar{\lambda}^{(1)}_{k+1}} \hspace{200cm} \\
+=& \rho \lambda^{(1)}_\text{prior} + \underbrace{(1-\rho) \bar{\lambda}^{(1)}_{k} + \rho \left[ \nabla_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \mathbf{m}_{k} \right]}_{\bar{\lambda}^{(1)}_{k+1}} \hspace{200cm} \\
 \end{aligned}
 $$
 
@@ -162,12 +170,12 @@ $$
 \require{cancel}
 \begin{aligned}
 =& -\frac{1}{2} \left[ (1-\rho) \mathbf{C}_{k}^{-1} - \rho \nabla^2_\mathbf{f} \mathcal{L}(\mathbf{m}_k) \right] \\
-=& -\frac{1}{2} (1-\rho) \mathbf{C}_{k}^{-1} +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
-=& -\frac{1}{2} (1-\rho) \left[ \bar{\mathbf{C}}_{k}^{-1} + \mathbf{K}^{-1}  \right] +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
-=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} \mathbf{K}^{-1}  (1-\rho) + \frac{1}{2} \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) - \frac{1}{2} \rho\mathbf{K}^{-1}\\ 
-=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} (1-\rho) \mathbf{K}^{-1} - \frac{1}{2} \rho\mathbf{K}^{-1} + \frac{1}{2} \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
-=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} \mathbf{K}^{-1} + \frac{1}{2} \rho \nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
-=& (1-\rho) \bar{\lambda}^{(2)}_{k} + \lambda^{(2)}_\text{prior}  + \rho \frac{1}{2}\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}}) \\ 
+=& -\frac{1}{2} (1-\rho) \mathbf{C}_{k}^{-1} +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
+=& -\frac{1}{2} (1-\rho) \left[ \bar{\mathbf{C}}_{k}^{-1} + \mathbf{K}^{-1}  \right] +\frac{1}{2} \rho \left[ \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \mathbf{K}^{-1} \right] \\ 
+=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} \mathbf{K}^{-1}  (1-\rho) + \frac{1}{2} \rho \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) - \frac{1}{2} \rho\mathbf{K}^{-1}\\ 
+=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} (1-\rho) \mathbf{K}^{-1} - \frac{1}{2} \rho\mathbf{K}^{-1} + \frac{1}{2} \rho \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \\ 
+=& -\frac{1}{2} \bar{\mathbf{C}}_{k}^{-1} (1-\rho) -\frac{1}{2} \mathbf{K}^{-1} + \frac{1}{2} \rho \nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \\ 
+=& (1-\rho) \bar{\lambda}^{(2)}_{k} + \lambda^{(2)}_\text{prior}  + \rho \frac{1}{2}\nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}}) \\ 
 \end{aligned}
 $$
 </details>
@@ -175,10 +183,11 @@ $$
 $$
 \require{cancel}
 \begin{aligned}
-=& \lambda^{(2)}_\text{prior} + \underbrace{(1-\rho) \bar{\lambda}^{(2)}_{k} + \rho \frac{1}{2}\nabla^2_\mathbf{f} \log p(\mathbf{y|\mathbf{m}_{k}})}_{\bar{\lambda}^{(2)}_{k+1}}  \hspace{200cm} \\ 
+=& \lambda^{(2)}_\text{prior} + \underbrace{(1-\rho) \bar{\lambda}^{(2)}_{k} + \rho \frac{1}{2}\nabla^2_\mathbf{f} \ln p(\mathbf{y|\mathbf{m}_{k}})}_{\bar{\lambda}^{(2)}_{k+1}}  \hspace{200cm} \\ 
 \end{aligned}
 $$
 
+<a id="Bayes-Newton"></a>
 ## Bayes-Newton (Variational Inference)
 
 Bayesian inference methods such as variational inference, power expectation propagation, and posterior linearisation can be view as Bayesian generalisations of Newton's method. 
@@ -219,16 +228,21 @@ $$
 &= \lambda_k - \rho \left( \nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] - \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \right)  \\
 &= \lambda_k - \rho \left( \lambda_k - \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \right)  \\
 &= (1-\rho) \lambda_k + \rho \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f}, \mathbf{y})] \\
+&= (1-\rho) \lambda_{k} + \rho \left( \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y}|\mathbf{f})] + \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{f})] \right) \\
+&= (1-\rho) \lambda_{k} + \rho \left( \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y}|\mathbf{f})] + \lambda_\text{prior} \right) \\
+&=  \rho \lambda_\text{prior} + (1-\rho) \bar{\lambda}_{k} + \rho \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y}|\mathbf{f})] \\
 \end{aligned}
 $$
 
-Refer to my tutorial on the [foundations of BLR](http://127.0.0.1:4000/CVI#natural-param-derivative) for proof of $\nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] = \lambda_k$.
+Refer to my tutorial on the [foundations of BLR](http://127.0.0.1:4000/CVI#natural-param-derivative) for proof of $\nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] = \lambda_k$. We can further simplify the update steps $$\lambda_{k+1}$$ by using the expectation parameterization and Bonnet's and Price's theorems.
 
 <details markdown=1>
-  <summary>Alternate Parameterizations and their Derivatives (click to see the details)</summary>
+  <summary>Expectation Parameterization and their Derivatives (click for more details)</summary>
 
-### Alternate Parameterizations and their Derivatives
-The exponential-family distributions such as the Gaussian distribution can be parametrized by the standard parameters $\theta$, i.e., the mean and covariance, and also the expectation parameters $\eta$ which can be related to the standard parameters $\theta$ as follows:
+---
+
+### Expectation Parameterization and its Derivatives
+The exponential-family distributions such as the Gaussian distribution can be parametrized by the standard parameters $\theta$, i.e., the mean $\mathbf{m}$ and covariance $\mathbf{C}$, and also the expectation parameters $\eta$ which can be related to the standard parameters $\theta$ as follows:
 
 $$
 \begin{alignat*}{3}
@@ -252,18 +266,21 @@ $$
 \implies \nabla_\eta^{(2)} f(\mathbf{m}, \mathbf{C}) &= \nabla_\mathbf{C} f(\mathbf{m}, \mathbf{C}) \\
 \end{aligned}
 $$
+
+---
+
 </details>
 
 <details markdown=1>
-  <summary>Bonnet's and Price's Theorems (click to see the details)</summary>
+  <summary>Bonnet's and Price's Theorems (click for more details)</summary>
 
-We can compute the gradients with respect to the expectation parameters $\eta$.
+---
 
 ### Bonnet's and Price's Theorems
 
 Let $f(\mathbf{x})$ be an arbitrary function of $\mathbf{x}$. Suppose that the elements $x_n$ of $\mathbf{x}$ are stochastic variables with joint probability density function $p(\mathbf{x})$. Then, for the special case that $\mathbf{x} \sim \mathcal{N}(\mathbf{m}, \mathbf{C})$, i.e., the variables $\mathbf{x}$ have a Gaussian distribution, the theorems give us the following results:
 
-* [Mean formulation](https://link.springer.com/article/10.1007/BF02994793): 
+* [Mean formulation (Bonnet's Theorem)](https://link.springer.com/article/10.1007/BF02994793): 
 
 $$
 \begin{aligned}
@@ -273,7 +290,7 @@ $$
 \end{aligned}
 $$
 
-* [Covariance formulation](https://arxiv.org/pdf/1710.03576.pdf): 
+* [Covariance formulation (Price's Theorem)](https://arxiv.org/pdf/1710.03576.pdf): 
 
 $$
 \begin{aligned}
@@ -284,7 +301,45 @@ $$
 $$
 
 where $c_{ij} = 1/2$ if $i=j$ and $c_{ij} = 1$ if $i \neq j$ (since $\mathbf{C}$ is symmetric).
+
+---
+
 </details>
+
+We can first use the derivatives of the expectation parameterization and then use Bonnet's and Price's theorems to get the following identities for an arbitrary function $\mathcal{L}(\mathbf{f})$:
+
+$$
+\begin{aligned}
+\nabla_{\eta^{(1)}} \mathbb{E}_{q(\mathbf{f})}[\mathcal{L}(\mathbf{f})] &= \nabla_\mathbf{m} \mathbb{E}_{q(\mathbf{f})}[\mathcal{L}(\mathbf{f})] - 2 \left[ \nabla_{\mathbf{C}} \mathbb{E}_{q(\mathbf{f})}[\mathcal{L}(\mathbf{f})] \right]  \mathbf{m} \\
+&= \mathbb{E}_{q(\mathbf{f})}[\nabla_\mathbf{f} \mathcal{L}(\mathbf{f})] - \mathbb{E}_{q(\mathbf{f})}[\nabla^2_{\mathbf{f}} \mathcal{L}(\mathbf{f})] \mathbf{m} \\
+\nabla_{\eta^{(2)}} \mathbb{E}_{q(\mathbf{f})}[\mathcal{L}(\mathbf{f})] &= \nabla_{\mathbf{C}} \mathbb{E}_{q(\mathbf{f})}[\mathcal{L}(\mathbf{f})] \\
+&= \frac{1}{2} \mathbb{E}_{q(\mathbf{f})}[\nabla^2_{\mathbf{f}} \mathcal{L}(\mathbf{f})] \\
+\end{aligned}
+$$
+
+We can use the above identities to derive $\lambda_{k+1}^{(1)}$ and $\lambda_{k+1}^{(2)}$ for variational inference which optimizes the VFE:
+
+$$
+\begin{aligned}
+\lambda_{k+1}^{(1)} &= \rho \lambda_\text{prior}^{(1)} + (1-\rho) \bar{\lambda}_{k}^{(1)} + \rho \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y}|\mathbf{f})] \\
+&= \rho \lambda_\text{prior}^{(1)} + \underbrace{(1-\rho) \bar{\lambda}_{k}^{(1)} + \rho \left( \mathbb{E}_{q(\mathbf{f})}[\nabla_\mathbf{f} \ln p(\mathbf{y}|\mathbf{f})] - \mathbb{E}_{q(\mathbf{f})}[\nabla^2_{\mathbf{f}} \ln p(\mathbf{y}|\mathbf{f})] \mathbf{m}_k \right)}_{\bar{\lambda}^{(1)}_{k+1}} \\
+\\
+\lambda_{k+1}^{(2)} &= \rho \lambda_\text{prior}^{(2)} + (1-\rho) \bar{\lambda}_{k}^{(2)} + \rho \nabla_\eta\mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y}|\mathbf{f})] \\
+&= \rho \lambda_\text{prior}^{(2)} + \underbrace{(1-\rho) \bar{\lambda}_{k}^{(2)} + \rho \frac{1}{2} \mathbb{E}_{q(\mathbf{f})}[\nabla^2_{\mathbf{f}} \ln p(\mathbf{y}|\mathbf{f})]}_{\bar{\lambda}^{(2)}_{k+1}} \\
+\end{aligned}
+$$
+
+As we can see, the variational inferrence updates are similar to the Newton's method and Laplace’s approximation based updates. The key difference is that here we use expectations of the derivatives with respect to the variational distribution $q(\mathbf{f})$ instead of evaluating the derivatives only at the mean $\mathbf{m}_k$. 
+
+<a id="Bayes-Gauss-Newton"></a>
+## Bayes-Gauss-Newton
+
+
+<a id="Bayes-Quasi-Newton"></a>
+## Bayes-Quasi-Newton
+
+<a id="Riemannian-Gradients"></a>
+## PSD constraints via Riemannian Gradients (VI)
 
 ---
 
