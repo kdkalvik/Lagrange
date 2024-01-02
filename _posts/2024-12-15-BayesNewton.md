@@ -9,13 +9,12 @@ abstract: "Tutorial on Bayes-Newton Methods for Approximate Bayesian Inference w
 
 ## Outline
 
-* [x] [Problem Formulation](http://127.0.0.1:4000/BayesNewton#Problem-Formulation)
-* [x] [Newton's Method and Laplace's approximation](http://127.0.0.1:4000/BayesNewton#Newton-Laplace)
-* [x] [Bayes-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Newton)
-* [x] [Limitation](http://127.0.0.1:4000/BayesNewton#Limitation)
-* [x] [Bayes-Gauss-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Gauss-Newton)
-* [x] [Bayes-Quasi-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Quasi-Newton)
-* [ ] [PSD constraints via Riemannian Gradients](http://127.0.0.1:4000/Riemannian-Gradients)
+* [Problem Formulation](http://127.0.0.1:4000/BayesNewton#Problem-Formulation)
+* [Newton-Laplace Method](http://127.0.0.1:4000/BayesNewton#Newton-Laplace)
+* [Bayes-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Newton)
+* [Key Limitation](http://127.0.0.1:4000/BayesNewton#Limitation)
+* [Bayes-Gauss-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Gauss-Newton)
+* [Bayes-Quasi-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Quasi-Newton)
 
 <a id="Problem-Formulation"></a>
 ## Problem Formulation
@@ -45,7 +44,7 @@ $$
 $$
 
 <a id="Newton-Laplace"></a>
-## Newton's Method and Laplace's approximation for Bayesian Inference
+## Newton-Laplace Method
 
 <details markdown=1>
   <summary>Taylor Series, Newton's Method, and Laplace's Approximation (click for more details)</summary>
@@ -78,9 +77,9 @@ $$
 
 In the multivariate scenario $\frac{1}{f''(\mathbf{x}_n)} = \mathbf{H}(f(\mathbf{x}_n))^{-1}$, i.e., it is the inverse of the Hessian. Unlike first order methods such as gradient descent, Newton's method uses a local quadratic approximation to find the descent direction. 
 
-### Laplace's approximation
+### Laplace's Approximation
 
-The Laplace's approximation is used to approximate computationally intractitble posterior probability distributions $p(\mathbf{y\mid x})$ by fitting a Gaussian distribution $q(\theta)$ with the mean $\mu$ equal to the maximum a posteriori (MAP) solution $\hat{\theta}$ and precision (inverse of the covariance $\Sigma$) equal to the Fisher information matrix $S^{-1}$:
+The Laplace's approximation is used to approximate computationally intractable posterior probability distributions $p(\mathbf{y\mid x})$ by fitting a Gaussian distribution $q(\theta)$ with the mean $\mu$ equal to the maximum a posteriori (MAP) solution $\hat{\theta}$ and precision (inverse of the covariance $\Sigma$) equal to the Fisher information matrix $S^{-1}$:
 
 $$
 \begin{aligned}
@@ -190,7 +189,9 @@ $$
 <a id="Bayes-Newton"></a>
 ## Bayes-Newton Method
 
-Bayesian inference methods such as variational inference, power expectation propagation, and posterior linearisation can be view as Bayesian generalisations of Newton's method. 
+Bayesian inference methods such as variational inference, power expectation propagation, and posterior linearization can be view as Bayesian generalizations of Newton's method. 
+
+### Variational Inference
 
 Variational inference with $q(\mathbf{f})$ parameterized by $\lambda$:
 
@@ -220,7 +221,9 @@ $$
 
 However, the method leverages the properties of the natural parametrization $\lambda$ of the exponential-family distributions to avoid having to explicitly computing the Fisher information matrix $\mathbf{F}$ by computing the gradients with respect to the expectation parameters $\eta$. 
 
-We can derive ...:
+### BLR for Variational Inference
+
+We can use BLR to derive efficient natural gradient updates for variational inference: 
 
 $$
 \begin{aligned}
@@ -234,7 +237,7 @@ $$
 \end{aligned}
 $$
 
-Refer to my tutorial on the [foundations of BLR](http://127.0.0.1:4000/CVI#natural-param-derivative) for proof of $\nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] = \lambda_k$. We can further simplify the update steps $$\lambda_{k+1}$$ by using the expectation parameterization and Bonnet's and Price's theorems.
+Refer to my tutorial on the [foundations of BLR](https://itskalvik.github.io/CVI#natural-param-derivative) for proof of $\nabla_\eta \mathbb{E}_{q(\mathbf{f})} [\ln q(\mathbf{f})] = \lambda_k$. We can further simplify the update steps $$\lambda_{k+1}$$ by using the expectation parameterization and Bonnet's and Price's theorems.
 
 <details markdown=1>
   <summary>Expectation Parameterization and their Derivatives (click for more details)</summary>
@@ -330,25 +333,25 @@ $$
 \end{aligned}
 $$
 
-As we can see, the variational inferrence updates are similar to the Newton's method and Laplace’s approximation based updates. The key difference is that here we use expectations of the derivatives with respect to the variational distribution $q(\mathbf{f})$ instead of evaluating the derivatives only at the mean $\mathbf{m}_k$. 
+As we can see, the variational inference updates are similar to the Newton's method and Laplace’s approximation based updates. The key difference is that here we use expectations of the derivatives with respect to the variational distribution $q(\mathbf{f})$ instead of evaluating the derivatives only at the mean $\mathbf{m}_k$. 
 
 <a id="Limitation"></a>
-## Limitation
+## Key Limitation
 
-A key limitation of the above two methods—Newton-Laplace Method and Bayes-Newton Method-is that they require computing the full Hessian matrix which could make the covariance of the approximate likelihood negative definite. But to get a valid posterior, we need to have a positive semi-definite (PSD). Therefore, Wilkinson et al. proposed two methods—Bayes-Gauss-Newton and Bayes-Quasi-Newton—to address this issue. The following sections detail these new methods.
-
-Problem child, explain:
+A key limitation of the above two methods—[Newton-Laplace Method](http://127.0.0.1:4000/BayesNewton#Newton-Laplace) and [Bayes-Newton Method](http://127.0.0.1:4000/BayesNewton#Bayes-Newton)-is that they require computing the full Hessian matrix $\mathbf{H}$ which could make the covariance $\bar{\mathbf{C}}$ of the approximate likelihood $p(\mathbf{y}\mid \mathbf{f})$ negative definite or indefinite. However, to get a valid posterior, we need to have a positive semi-definite (PSD) Hessian:
 
 $$
-\mathbf{H}=\nabla^2_\mathbf{f} \ln p(\mathbf{y|f})
+\begin{aligned}
+\text{Newton-Laplace Method: } \mathbf{H} &= \nabla^2_\mathbf{f} \ln p(\mathbf{y}|\mathbf{m}_k)\\
+\text{Bayes-Newton Method: } \mathbf{H} &= \mathbb{E}_{q(\mathbf{f})}[\nabla^2_{\mathbf{f}} \ln p(\mathbf{y}|\mathbf{f})]
+\end{aligned}
 $$
+
 
 <a id="Bayes-Gauss-Newton"></a>
 ## Bayes-Gauss-Newton Method
 
-One approach to ensure that the covariance is PSD is to use a Gauss-Newton approximation, which replaces the Hessian $\mathbf{H}$ with a first order approximation which is guraenteed to be PSD. We do this by considering the approximate likelihood $p(\mathbf{y \mid f})$, and reformulate it as a nonlinear least-squares-problem, this allows us to apply the Gauss-Newton approximation. 
-
-Consider the likelihood:
+One approach to ensure that the covariance is PSD is to use a Gauss-Newton approximation, which replaces the Hessian $\mathbf{H}$ with a first order approximation which is guaranteed to be PSD. We do this by considering the approximate likelihood $p(\mathbf{y \mid f})$, and reformulate it as a nonlinear least-squares-problem, which allows us to apply the Gauss-Newton approximation. Consider the likelihood:
 
 $$
 \begin{aligned}
@@ -377,7 +380,7 @@ $$
 \end{bmatrix}
 $$
 
-We can plug the above into the Hessian term used in the Bayes-Newton based variational inference method [shown above](http://127.0.0.1:4000/BayesNewton#BayesNewtonVFE):
+We can plug the above into the Hessian $\mathbf{H}$ used in the [Bayes-Newton based variational inference method](http://127.0.0.1:4000/BayesNewton#BayesNewtonVFE):
 
 $$
 \begin{aligned}
@@ -406,7 +409,7 @@ $$
 \end{aligned}
 $$
 
-Note that the notatins used in the above are not accurate. Refer to these [notes](https://www.math.lsu.edu/system/files/MunozGroup1%20-%20Presentation.pdf) for the full details of the Gauss-Newton method with the correct notation.
+Note that the notation used above is not accurate. Refer to these [notes](https://www.math.lsu.edu/system/files/MunozGroup1%20-%20Presentation.pdf) for the full details of the Gauss-Newton method with the correct notation.
 
 ---
 
@@ -421,30 +424,42 @@ $$
 \mathbf{B}^+ = \mathbf{B} - \frac{\mathbf{B}\mathbf{s}\mathbf{s}^\top\mathbf{B}}{\mathbf{s}^\top\mathbf{B}\mathbf{s}} + \frac{\mathbf{g}\mathbf{g}^\top}{\mathbf{g}^\top\mathbf{s}} 
 $$
 
-here, $\mathbf{B}^+$ is the approximation of the Hessian $\mathbf{H}$ at iteration $k+1$ and $\mathbf{B}$ at iteration $k$. The difference of the mean terms is $$\mathbf{s}=\mathbf{m}_{k+1}-\mathbf{m}_k$$, and the difference of the derivatives of the likelihood is $$\mathbf{g} = \nabla_\mathbf{f} \ln p(\mathbf{y}\mid\mathbf{f})\rvert_{\mathbf{f}=\mathbf{m}_{k+1}} - \nabla_\mathbf{f} \ln p(\mathbf{y}\mid\mathbf{f})\rvert_{\mathbf{f}=\mathbf{m}_{k}}$$. 
+here, $\mathbf{B}^+$ is the approximation of the Hessian $\mathbf{H}$ at iteration $k+1$ and $\mathbf{B}$ at iteration $k$. The difference of the mean terms is $$\mathbf{s}=\mathbf{m}_{k+1}-\mathbf{m}_k$$, and the difference of the derivatives of the likelihood is $$\mathbf{g} = \nabla_\mathbf{f} \ln p(\mathbf{y}\mid\mathbf{m}_{k}) - \nabla_\mathbf{f} \ln p(\mathbf{y}\mid\mathbf{m}_{k})$$ for the [Newton-Laplace method](http://127.0.0.1:4000/BayesNewton#Newton-Laplace). 
 
-Also, the full covariance matrix $\mathbf{C}$ cannot be well approximated by the above iterative low-rank updates. Therefore, Wilkinson et al. porpose to instaed use the quasi-Newton updates to the local approximate likelihood terms $\ln p(\mathbf{y}_n\mid\mathbf{f}_n)$. Refer to these [notes](https://www.stat.cmu.edu/~ryantibs/convexopt-F16/lectures/quasi-newton.pdf) for further details of quasi-Netwon methods. 
+However, when using the [Bayes-Newton variational inference method](http://127.0.0.1:4000/BayesNewton#Bayes-Newton), since we optimize both the mean $\mathbf{m}$ and the covariance $\mathbf{C}$ of the posterior together, we need to incorporate the changes in  the covariance $\mathbf{C}$ to get accurate quasi-Newton approximations of the Hessian. We can do this by updating $\mathbf{s}$ and $\mathbf{g}$ as follows:
 
-<a id="Riemannian-Gradients"></a>
-## PSD constraints via Riemannian Gradients
+$$
+\begin{aligned}
+\mathbf{s} &= \theta_{k+1}-\theta_k \\
+\text{where,} \ 
+\theta &= \begin{bmatrix}
+\mathbf{m} \\
+\text{vec}(\mathbf{C})
+\end{bmatrix} \\
+\text{and,} \
+\mathbf{g} &= \nabla_\mathbf{\theta} \mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y|f})]\rvert_{\theta=\theta_{k+1}}  - \nabla_\mathbf{\theta} \mathbb{E}_{q(\mathbf{f})} [\ln p(\mathbf{y|f})]\rvert_{\theta=\theta_{k}} \\
+\end{aligned} \\
+$$
 
-Finally, another approach to ensure that the covariance $\mathbf{C}$ is PSD is to use Riemannian gradient methods. Here the Hessian $\mathbf{H}$ is approximated as follows:
+Here, $\text{vec}(\mathbf{C})$ is the vectorized covariance matrix $\mathbf{C}$. Note that the above results in $\mathbf{B} \in \mathbb{R}^{(D+D^2)\times (D+D^2)}$ when $\mathbf{m} \in \mathbb{R}^{D}$, but only the upper left $D \times D$ block corresponds to the approximate Hessian and the rest is used only for the BFGS method.
+
+In addition, note that the earlier derived update steps for variational Bayes-Newton do not hold anymore. This is because the original Hessian $$\mathbb{E}_{q(\mathbf{f})}[\nabla^2_{\mathbf{f}} \ln p(\mathbf{y}\mid\mathbf{f})]$$ in variational Bayes-Newton computes the Jacobian with respect to the latent variables $\mathbf{f}$. But the above approximation requires us to compute the Jacobian with respect to the parameters $\theta$ which can be achieved by undoing the application of Bonnet's and Price's theorems in the original derivation, which would change the update equations.
+
+Also, the full covariance matrix $\mathbf{C}$ cannot be well approximated by the above iterative low-rank updates. Therefore, [Wilkinson et al.](https://www.jmlr.org/papers/volume24/21-1298/21-1298.pdf) proposed to instead use the quasi-Newton updates to the local approximate likelihood terms $\ln p(\mathbf{y}_n\mid\mathbf{f}_n)$ as $\mathbf{y}_n$ only depends on $\mathbf{f}_n$ because of our original factorization assumption. Refer to these [notes](https://www.stat.cmu.edu/~ryantibs/convexopt-F16/lectures/quasi-newton.pdf) for further details of quasi-Newton methods. 
+
+## Riemannian Gradients
+
+Finally, another approach to ensure that the covariance $\mathbf{C}$ is PSD is to use Riemannian gradients. Here the Hessian $\mathbf{H}$ is approximated as follows:
 
 $$
 \begin{aligned}
 \bar{\mathcal{L}}(\mathbf{m, C}) = \mathbb{E}_{q(\mathbf{f})}[\ln p(\mathbf{y}|\mathbf{f})] \\
-\mathbf{G} = \bar{\mathbf{C}}^{-1} +  \nabla^2_\mathbf{\eta} \bar{\mathcal{L}}(\mathbf{m, C}) \\
+\mathbf{G} = \bar{\mathbf{C}}^{-1} - \nabla^2_\mathbf{\eta} \bar{\mathcal{L}}(\mathbf{m, C}) \\
 \mathbf{H} = \nabla^2_\mathbf{\eta} \bar{\mathcal{L}}(\mathbf{m, C}) - \frac{\rho}{2} \mathbf{G}\bar{\mathbf{C}}\mathbf{G}
 \end{aligned}
 $$
 
 ---
-
-$$
-\begin{aligned}
-\end{aligned}
-$$
-
 
 # References
 
