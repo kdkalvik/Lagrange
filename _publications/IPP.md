@@ -24,5 +24,15 @@ Paper: <a href="https://arxiv.org/pdf/2309.07050.pdf"><span style="color: #4285F
 Appendix: <a href="https://nbviewer.org/github/itskalvik/itskalvik.github.io/blob/gh-pages/assets/SGP_IPP_APP.pdf"><span style="color: #4285F4;"><i class="fa fa-file-text"></i></span></a>
 </center>
 
+\
+&nbsp;
+
+<p float="left">
+  <img src="{{ site.github.url }}/assets/img/ICRA2024_logo.png" width="40%" style="vertical-align:middle"/>
+</p>
+
+\
+&nbsp;
+
 ## Abstract
 This paper addresses multi-robot informative path planning (IPP) for environmental monitoring.  The problem involves determining informative regions in the environment that should be visited by robots in order to gather the most amount of information about the environment. We propose an efficient sparse Gaussian process-based approach that uses gradient descent to optimize paths in continuous environments. Our approach efficiently scales to both spatially and spatio-temporally correlated environments. Moreover, our approach can simultaneously optimize the informative paths while accounting for routing constraints, such as a distance budget and limits on the robot's velocity and acceleration. Our approach can be used for IPP with both discrete and continuous sensing robots, with point and non-point field-of-view sensing shapes, and for both single and multi-robot IPP. We demonstrate that the proposed approach is fast and accurate on real-world data.
