@@ -2,9 +2,9 @@
 layout: publication
 title: "Multi-Robot Informative Path Planning from Regression with Sparse Gaussian Processes"
 author: "Kalvik Jakkala"
-venue: Under Review
-year: 2023
-date: 2023-08-29 00:00:00
+venue: ICRA
+year: 2024
+date: 2024-01-29 00:00:00
 ---
 
 <p>
